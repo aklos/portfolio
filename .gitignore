@@ -104,3 +104,4 @@ typings/
 
 dist/*
 !dist/index.html
+!dist/favicon.png

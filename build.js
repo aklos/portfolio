@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const esbuild = require("esbuild");
 const postcss = require("esbuild-postcss");
+const svgr = require("esbuild-plugin-svgr");
 
 dotenv.config();
 
@@ -16,7 +17,10 @@ esbuild
     bundle: true,
     minify: true,
     outdir: "dist",
-    plugins: [postcss()],
+    loader: {
+      ".ttf": "file",
+    },
+    plugins: [postcss(), svgr()],
     define,
   })
   .catch((err) => {
