@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Mailbox2, Linkedin, Github } from "react-bootstrap-icons";
 import Logo from "../assets/logo.svg";
-import NostroPng from "../assets/nostro.png";
+import NostroJpg from "../assets/nostro.jpg";
 import DeldicoPng from "../assets/deldico.png";
 import MachinePng from "../assets/machine.png";
 import RiskPng from "../assets/riskxchange.png";
-import BulbPng from "../assets/bulb.png";
+import BulbJpg from "../assets/bulb.jpg";
 import MotorwayPng from "../assets/motorway.png";
 import Splash from "./Splash";
 
@@ -98,7 +98,7 @@ export default function App() {
                 date="Q1 2022"
                 company="Nostro Trading"
                 link="https://nostrotrading.co.uk"
-                image={NostroPng}
+                image={NostroJpg}
                 description={
                   <p>
                     Developed the product and website for prop trading firm.
@@ -151,7 +151,7 @@ export default function App() {
                 date="Q1 2019 - Q2 2020"
                 company="Bulb Energy"
                 link="https://bulb.co.uk"
-                image={BulbPng}
+                image={BulbJpg}
                 description={
                   <p>
                     Full-stack engineer working on multiple projects at the
