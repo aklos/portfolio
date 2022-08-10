@@ -1,7 +1,12 @@
 import * as React from "react";
-import Thumbnail from "react-webpage-thumbnail";
-import Logo from "../assets/logo.svg";
 import { Mailbox2, Linkedin, Github } from "react-bootstrap-icons";
+import Logo from "../assets/logo.svg";
+import NostroPng from "../assets/nostro.png";
+import DeldicoPng from "../assets/deldico.png";
+import MachinePng from "../assets/machine.png";
+import RiskPng from "../assets/riskxchange.png";
+import BulbPng from "../assets/bulb.png";
+import MotorwayPng from "../assets/motorway.png";
 import Splash from "./Splash";
 
 export default function App() {
@@ -15,6 +20,7 @@ export default function App() {
           </div>
           <div className="grid grid-cols-3 gap-3">
             <NavButton
+              title="Send me an email"
               onClick={() => {
                 window.location.href = "mailto:contact@alexklos.ca";
               }}
@@ -22,6 +28,7 @@ export default function App() {
               <Mailbox2 size={34} />
             </NavButton>
             <NavButton
+              title="See my LinkedIn"
               onClick={() => {
                 window.open(
                   "https://www.linkedin.com/in/alexander-klos-460787120/",
@@ -32,6 +39,7 @@ export default function App() {
               <Linkedin size={25} className="mx-auto" />
             </NavButton>
             <NavButton
+              title="See my GitHub"
               onClick={() => {
                 window.open("https://github.com/aklos", "_blank");
               }}
@@ -40,7 +48,7 @@ export default function App() {
             </NavButton>
           </div>
         </div>
-        <div className="text-xl">
+        <div className="text-lg">
           <section className="mb-16">
             <p>
               I'm a full-stack web and indie game developer. My focus is on
@@ -77,14 +85,20 @@ export default function App() {
                 <span>Rust</span>
               </TechPill>
             </div>
+            <p>
+              Besides that I often work with the following tech & platforms:{" "}
+              <b>React</b>, <b>Node</b>, <b>D3.js</b>, <b>Postgres</b>,{" "}
+              <b>AWS</b>, and <b>Docker</b>.
+            </p>
           </section>
           <section>
-            <h3 className="mb-8 uppercase">Some of the work I've done:</h3>
+            <h3 className="mb-8 uppercase">Some of my work:</h3>
             <ul className="list-none m-0 p-0">
               <Experience
                 date="Q1 2022"
                 company="Nostro Trading"
                 link="https://nostrotrading.co.uk"
+                image={NostroPng}
                 description={
                   <p>
                     Developed the product and website for prop trading firm.
@@ -97,6 +111,7 @@ export default function App() {
                 date="Q1 2022"
                 company="Deldico BE"
                 link="https://deldico.be"
+                image={DeldicoPng}
                 description={
                   <p>
                     Helped develop new marketing platform. Created Docker
@@ -109,6 +124,7 @@ export default function App() {
                 date="Q4 2021"
                 company="This Machine Greens"
                 link="https://thismachinegreens.com"
+                image={MachinePng}
                 description={
                   <p>
                     Website creation and AI video post-processing. Designed and
@@ -122,6 +138,7 @@ export default function App() {
                 date="Q4 2020 - Q1 2021"
                 company="RiskXchange"
                 link="https://riskxchange.co"
+                image={RiskPng}
                 description={
                   <p>
                     Designed and generated dynamic visual reports. Fetched data
@@ -134,6 +151,7 @@ export default function App() {
                 date="Q1 2019 - Q2 2020"
                 company="Bulb Energy"
                 link="https://bulb.co.uk"
+                image={BulbPng}
                 description={
                   <p>
                     Full-stack engineer working on multiple projects at the
@@ -147,6 +165,7 @@ export default function App() {
                 date="Q2 2017 - Q4 2018"
                 company="Motorway"
                 link="https://motorway.co.uk"
+                image={MotorwayPng}
                 description={
                   <p>
                     Full-stack engineer working as part of the original team.
@@ -168,12 +187,17 @@ export default function App() {
   );
 }
 
-function NavButton(props: { children: any; onClick: () => void }) {
-  const { children, onClick } = props;
+function NavButton(props: {
+  children: any;
+  title: string;
+  onClick: () => void;
+}) {
+  const { children, title, onClick } = props;
   return (
     <button
       className="relative rounded-full text-blue-600 hover:text-blue-500 transition duration-100 w-12 h-12"
       onClick={onClick}
+      title={title}
     >
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         {children}
@@ -186,7 +210,7 @@ function TechPill(props: { children: any }) {
   const { children } = props;
 
   return (
-    <div className="odd:bg-gray-200 even:bg-gray-100 px-2 py-1 text-center">
+    <div className="odd:bg-gray-200 even:bg-gray-100 px-2 py-1 text-center font-bold">
       {children}
     </div>
   );
@@ -196,9 +220,10 @@ function Experience(props: {
   date: string;
   company: string;
   link: string;
+  image: string;
   description: React.ReactElement<any, any>;
 }) {
-  const { date, company, link, description } = props;
+  const { date, company, link, image, description } = props;
 
   // React.useEffect(() => {}, []);
 
@@ -206,7 +231,7 @@ function Experience(props: {
     <li className="list-inside p-0 m-0 flex mb-8">
       <div className="flex-shrink-0 w-[256px] h-[170px]">
         <a href={link}>
-          <Thumbnail url={link} width={256} height={170} />
+          <img src={"/static/" + image.split("./")[1]} className="m-0" />
         </a>
       </div>
       <div className="px-4 py-1">

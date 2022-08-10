@@ -19,6 +19,7 @@ esbuild
     outdir: "dist",
     loader: {
       ".ttf": "file",
+      ".png": "file",
     },
     plugins: [postcss(), svgr()],
     define,
