@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Rubik, Roboto } from "next/font/google";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import Button from "@/components/button";
+import Link from "next/link";
 
 const rubik = Rubik({
     subsets: ["latin"],
@@ -32,7 +33,9 @@ export default function RootLayout({
                             className={`w-full flex items-center justify-between ${rubik.className}`}
                         >
                             <div className="font-medium">
-                                <Typewriter text="PROHOBO.DEV" delay={75} />
+                                <Link href="/">
+                                    <Typewriter text="PROHOBO.DEV" delay={75} />
+                                </Link>
                             </div>
                             <div>
                                 <div className="flex items-center gap-4">
