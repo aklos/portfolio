@@ -1,44 +1,59 @@
 import Email from "@/components/email";
 import Project from "@/components/project";
 import Splash from "@/components/splash";
-import { Roboto } from "next/font/google";
-
-const roboto = Roboto({ subsets: ["latin"], weight: ["300", "400", "500"] });
 
 export default function Home() {
     return (
         <div>
             <section className="mb-16">
                 <Splash />
-            </section>
-            <section className="mb-16 prose max-w-screen-md mx-auto">
-                <p className={roboto.className}>
-                    Hi! I'm an experienced <b>full-stack web</b> and{" "}
-                    <b>independent game developer</b> who thrives on creating
-                    compelling digital experiences. As a freelancer, I spend
-                    most of my time developing web applications. I also work on
-                    games and desktop/mobile applications when the opportunity
-                    arises.
-                </p>
-                <p className={roboto.className}>
-                    My tech stack includes <b>Typescript</b>, <b>Python</b>, and{" "}
-                    <b>Rust</b>. I'm currently studying{" "}
-                    <b>deep neural networks</b>. Regardless of the platform
-                    (AWS, Fly.io, Heroku, etc.), I handle my own deployments so
-                    that the products I develop are always performing at their
-                    best.
-                </p>
-                <p className={roboto.className}>
-                    My primary goal is not just to master a long list of
-                    frameworks and technologies, but to utilize them effectively
-                    to build tools, services, and games that offer outstanding
-                    experiences.
-                </p>
-                <div className="bg-yellow-50 p-4 mt-12">
-                    Currently busy with contract work. But if you want to get in
-                    touch, send me an email: <Email />
+                <div className="bg-orange-100 p-4">
+                    Currently busy! But if you want to get in touch, send me an
+                    email: <Email />
                 </div>
             </section>
+            <div className="grid md:grid-cols-2 gap-16 mb-16">
+                <section className="prose max-w-screen-md">
+                    <p>
+                        Hi! I'm an experienced <b>full-stack web</b> and{" "}
+                        <b>independent game developer</b> who thrives on
+                        creating compelling digital experiences. As a
+                        freelancer, I spend most of my time developing web
+                        applications. I also work on games and desktop/mobile
+                        applications when the opportunity arises.
+                    </p>
+                    <p>
+                        My tech stack includes <b>Typescript</b>, <b>Python</b>,
+                        and <b>Rust</b>. I'm currently studying{" "}
+                        <b>deep neural networks</b>. Regardless of the platform
+                        (AWS, Fly.io, Heroku, etc.), I handle my own deployments
+                        so that the products I develop are always performing at
+                        their best.
+                    </p>
+                    <p>
+                        My goal is not to master a long list of frameworks and
+                        technologies, but to utilize them effectively to build
+                        tools, services, and games that offer great experiences.
+                    </p>
+                </section>
+                <div className="prose">
+                    <h3>My services:</h3>
+                    <ul>
+                        <li>
+                            Web development (marketing, CMS, APIs, dashboards)
+                        </li>
+                        <li>
+                            Scripting (data processing, neural networks,
+                            automation)
+                        </li>
+                        <li>
+                            Desktop applications (tooling, clients, automation)
+                        </li>
+                        <li>Technical consultations</li>
+                    </ul>
+                    <p></p>
+                </div>
+            </div>
             <div className="border-b my-16"></div>
             <section className="mb-16 prose max-w-none">
                 <h3>Projects</h3>
@@ -76,7 +91,7 @@ export default function Home() {
                         position="Software development"
                     ></Project>
                     <Project
-                        title="Deldico Tracking API"
+                        title="CNTRC AI"
                         position="Software development"
                     ></Project>
                 </div>

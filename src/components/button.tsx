@@ -20,7 +20,7 @@ export default function Button(props: {
     };
     return (
         <Container>
-            <button className="flex items-center hover:bg-gray-100 transition duration-100 px-2 py-0.5">
+            <button className="flex items-center hover:bg-gray-200 transition duration-100 px-0.5 py-0.5">
                 {props.icon ? props.icon : null}
                 <span className={rubik.className}>{props.label}</span>
             </button>

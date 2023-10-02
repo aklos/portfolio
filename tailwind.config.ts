@@ -6,6 +6,7 @@ const config: Config = {
         "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
         "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
+    darkMode: "class",
     theme: {
         container: {
             center: true,
@@ -14,10 +15,6 @@ const config: Config = {
                 "2xl": "1400px",
             },
         },
-        // fontFamily: {
-        //     display: ["Rubik"],
-        //     body: ["Roboto"],
-        // },
         extend: {},
     },
     plugins: [require("@tailwindcss/typography")],

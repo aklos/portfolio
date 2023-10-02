@@ -7,6 +7,7 @@ import vertexShader from "@/shaders/vertex.glsl";
 import fragmentShader from "@/shaders/fragment.glsl";
 import { useTexture } from "@react-three/drei";
 import { Rubik } from "next/font/google";
+import Image from "next/image";
 
 const rubik = Rubik({
     subsets: ["latin"],
@@ -70,13 +71,13 @@ export default function Splash() {
             >
                 <Scene />
             </Canvas>
-            <div
-                className={`${rubik.className} absolute font-bold top-1/2 left-1/2 mix-blend-color text-white transform -translate-y-1/2 -translate-x-1/2 md:whitespace-nowrap`}
-            >
-                <span className="text-3xl md:text-5xl">ALEX KLOS /</span>
-                <span className="whitespace-nowrap md:text-2xl">
-                    SOFTWARE ENGINEER
-                </span>
+            <div className="absolute font-bold top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                <Image
+                    src="/signature.svg"
+                    alt="Signature"
+                    width={350}
+                    height={100}
+                />
             </div>
         </div>
     );

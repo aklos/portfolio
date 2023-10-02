@@ -8,7 +8,10 @@ import Button from "@/components/button";
 const rubik = Rubik({
     subsets: ["latin"],
 });
-const roboto = Roboto({ subsets: ["latin"], weight: ["300"] });
+const roboto = Roboto({
+    subsets: ["latin"],
+    weight: ["300", "400", "500"],
+});
 
 export const metadata: Metadata = {
     title: "Alex Klos / Prohobo.dev",
@@ -22,7 +25,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={`${roboto.className}`}>
+            <body className={`${roboto.className} bg`}>
                 <main className="container">
                     <nav className="w-full h-[54px] flex items-center">
                         <div
@@ -32,20 +35,20 @@ export default function RootLayout({
                                 <Typewriter text="PROHOBO.DEV" delay={75} />
                             </div>
                             <div>
-                                <div className="flex items-center">
+                                <div className="flex items-center gap-4">
                                     <Button
                                         url="https://www.linkedin.com/in/alexander-klos-460787120"
                                         icon={
-                                            <AiFillLinkedin className="text-2xl mr-1" />
+                                            <AiFillLinkedin className="text-2xl" />
                                         }
-                                        label="LinkedIn"
+                                        label=""
                                     />
                                     <Button
                                         url="https://github.com/aklos"
                                         icon={
-                                            <AiFillGithub className="text-2xl mr-1" />
+                                            <AiFillGithub className="text-2xl" />
                                         }
-                                        label="Github"
+                                        label=""
                                     />
                                 </div>
                             </div>

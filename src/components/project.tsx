@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { Rubik, Roboto } from "next/font/google";
+import { Rubik } from "next/font/google";
 
 const rubik = Rubik({
     subsets: ["latin"],
 });
-const roboto = Roboto({ subsets: ["latin"], weight: ["300", "400"] });
 
 export default function Project(props: {
     title: string;
@@ -18,11 +17,11 @@ export default function Project(props: {
             {props.image ? (
                 <div className="relative w-full h-[260px]">
                     <Image
-                        className="my-0"
+                        className="w-full aspect-auto"
                         src={props.image}
                         alt={props.image}
-                        fill
-                        objectFit="contain"
+                        width={320}
+                        height={260}
                     />
                 </div>
             ) : null}
