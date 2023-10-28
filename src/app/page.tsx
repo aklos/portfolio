@@ -1,18 +1,22 @@
 import Email from "@/components/email";
 import Project from "@/components/project";
 import Splash from "@/components/splash";
+import { PiCaretRightBold } from "react-icons/pi";
 
 export default function Home() {
     return (
         <div>
             <section className="mb-16">
                 <Splash />
-                <div className="bg-orange-100 p-4">
-                    Currently busy! But if you want to get in touch, send me an
-                    email: <Email />
+                <div className="bg-blue-50 p-4 text-center md:text-left">
+                    <PiCaretRightBold className="mr-1 mb-1 hidden md:inline-block" />
+                    <span>
+                        Currently busy! But if you want to get in touch, send me
+                        an email: <Email />
+                    </span>
                 </div>
             </section>
-            <div className="grid md:grid-cols-2 gap-16 mb-16">
+            <div className="grid md:grid-cols-2 gap-16 mb-16 px-4 md:px-0">
                 <section className="prose max-w-screen-md">
                     <p>
                         Hi! I'm an experienced <b>full-stack web</b> and{" "}
@@ -55,49 +59,54 @@ export default function Home() {
                 </div>
             </div>
             <div className="border-b my-16"></div>
-            <section className="mb-16 prose max-w-none">
-                <h3>Projects</h3>
+            <section className="mb-16 prose max-w-none px-4 md:px-0">
+                <h3>Projects & Clients</h3>
                 <div className="mt-8 grid md:grid-cols-4 gap-16">
-                    <Project
-                        title="This Machine Greens"
-                        position="Web design, development, and VFX"
-                    ></Project>
-                    <Project
-                        title="ECG Classification"
-                        position="Software development"
-                    ></Project>
                     <Project
                         title="Project Sailor"
                         position="Software development"
-                    ></Project>
-                    <Project
-                        title="Next Chapter"
-                        position="Web design & development"
-                    ></Project>
-                    <Project
-                        title="Hoorcentrum Aerts"
-                        position="Web design & development"
-                    ></Project>
-                    <Project
-                        title="RiskXchange"
-                        position="Software development"
-                    ></Project>
-                    <Project
-                        title="Slogidex"
-                        position="Software development"
-                    ></Project>
-                    <Project
-                        title="Taskineer"
-                        position="Software development"
+                        timePeriod="WIP"
                     ></Project>
                     <Project
                         title="CNTRC AI"
                         position="Software development"
+                        link="https://www.cntrc.ai/"
+                        timePeriod="2023"
+                    ></Project>
+                    <Project
+                        title="Next Chapter"
+                        position="Web design & development"
+                        link="https://www.nextchapter.agency/en"
+                        timePeriod="2023"
+                    ></Project>
+                    <Project
+                        title="Hoorcentrum Aerts"
+                        position="Web design & development"
+                        link="https://hoorcentrumaerts.be/"
+                        timePeriod="2023"
+                    ></Project>
+                    <Project
+                        title="Slogidex"
+                        position="Software development"
+                        link="https://github.com/aklos/slogidex"
+                        timePeriod="2023"
+                    ></Project>
+                    <Project
+                        title="This Machine Greens"
+                        position="Web design, development, and VFX"
+                        link="https://thismachinegreens.com/"
+                        timePeriod="2021"
+                    ></Project>
+                    <Project
+                        title="RiskXchange"
+                        position="Software development"
+                        link="https://riskxchange.co/"
+                        timePeriod="2020"
                     ></Project>
                 </div>
             </section>
             <div className="border-b my-16"></div>
-            <section className="mb-16 prose max-w-none">
+            <section className="mb-16 prose max-w-none px-4 md:px-0">
                 <h3>Experience</h3>
                 <div className="grid md:grid-cols-3 gap-16">
                     <Project
@@ -111,6 +120,7 @@ export default function Home() {
                         image="/motorway.png"
                         timePeriod="Q2 2017 - Q1 2019"
                         position="Software engineer"
+                        link="https://motorway.co.uk/"
                     ></Project>
                     <Project
                         title="SSK"

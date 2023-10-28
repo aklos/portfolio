@@ -12,9 +12,8 @@ export default function Email() {
     });
 
     return (
-        <a
-            href={`mailto:${a}@${b}`}
-            className="font-medium underline"
-        >{`${a}@${b}`}</a>
+        <a href={`mailto:${a}@${b}`} className="font-medium underline">
+            {!a && !b ? "..." : `${a}@${b}`}
+        </a>
     );
 }

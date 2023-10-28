@@ -23,3 +23,11 @@
         ),
         linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
 }
+
+a {
+    transition: 100ms all;
+}
+
+a:hover {
+    color: orange;
+}

@@ -6,10 +6,11 @@ import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import Button from "@/components/button";
 import Link from "next/link";
 
-const rubik = Rubik({
+export const rubik = Rubik({
     subsets: ["latin"],
 });
-const roboto = Roboto({
+
+export const roboto = Roboto({
     subsets: ["latin"],
     weight: ["300", "400", "500"],
 });
@@ -27,8 +28,8 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${roboto.className} bg`}>
-                <main className="container">
-                    <nav className="w-full h-[54px] flex items-center">
+                <main className="container px-0 md:px-8">
+                    <nav className="w-full h-[54px] flex items-center px-4 md:px-0">
                         <div
                             className={`w-full flex items-center justify-between ${rubik.className}`}
                         >
@@ -44,23 +45,43 @@ export default function RootLayout({
                                         icon={
                                             <AiFillLinkedin className="text-2xl" />
                                         }
-                                        label=""
+                                        label="LinkedIn"
+                                        title="LinkedIn"
+                                        shrink
                                     />
                                     <Button
                                         url="https://github.com/aklos"
                                         icon={
                                             <AiFillGithub className="text-2xl" />
                                         }
-                                        label=""
+                                        label="Github"
+                                        title="Github"
+                                        shrink
                                     />
                                 </div>
                             </div>
                         </div>
                     </nav>
                     <div className="min-h-screen">{children}</div>
-                    <footer className="text-center text-sm opacity-40 py-16">
-                        <div>Copyright © Alexander Klos</div>
-                        <div>Suite 59, 30 Durham Road, London, SW20 0TW</div>
+                    <footer className="text-sm py-16">
+                        <div className="flex items-center justify-center gap-4 mb-8">
+                            <Button
+                                url="https://www.linkedin.com/in/alexander-klos-460787120"
+                                icon={<AiFillLinkedin className="text-4xl" />}
+                                title="LinkedIn"
+                            />
+                            <Button
+                                url="https://github.com/aklos"
+                                icon={<AiFillGithub className="text-4xl" />}
+                                title="Github"
+                            />
+                        </div>
+                        <div className="opacity-40 text-center">
+                            <div>Copyright © Alexander Klos</div>
+                            <div>
+                                Suite 59, 30 Durham Road, London, SW20 0TW
+                            </div>
+                        </div>
                     </footer>
                 </main>
             </body>

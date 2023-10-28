@@ -72,12 +72,7 @@ export default function Splash() {
                 <Scene />
             </Canvas>
             <div className="absolute font-bold top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                <Image
-                    src="/signature.svg"
-                    alt="Signature"
-                    width={350}
-                    height={100}
-                />
+                <Image src="/logo.svg" alt="logo" width={150} height={100} />
             </div>
         </div>
     );
