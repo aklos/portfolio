@@ -18,6 +18,17 @@ export const roboto = Roboto({
 export const metadata: Metadata = {
     title: "Alex Klos / Prohobo.dev",
     description: "My portfolio site",
+    icons: {
+        icon: "https://prohobo.dev/logo.svg",
+    },
+    openGraph: {
+        siteName: "PROHOBO.DEV",
+        title: "Alex Klos / Prohobo.dev",
+        description: "My portfolio site",
+        images: {
+            url: "https://prohobo.dev/logo.svg",
+        },
+    },
 };
 
 export default function RootLayout({
