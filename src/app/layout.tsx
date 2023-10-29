@@ -19,14 +19,15 @@ export const metadata: Metadata = {
     title: "Alex Klos / Prohobo.dev",
     description: "My portfolio site",
     icons: {
-        icon: "https://prohobo.dev/logo.svg",
+        icon: "https://prohobo.dev/favicon_2x.ico",
+        apple: "https://prohobo.dev/favicon_2x.ico",
     },
     openGraph: {
         siteName: "PROHOBO.DEV",
         title: "Alex Klos / Prohobo.dev",
         description: "My portfolio site",
         images: {
-            url: "https://prohobo.dev/logo.svg",
+            url: "https://prohobo.dev/icon.png",
         },
     },
 };
