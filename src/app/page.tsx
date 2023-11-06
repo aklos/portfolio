@@ -63,6 +63,12 @@ export default function Home() {
                 <h3>Projects & Clients</h3>
                 <div className="mt-8 grid md:grid-cols-4 gap-16">
                     <Project
+                        title="Detoxer"
+                        position="Software development"
+                        link="https://addons.mozilla.org/en-US/firefox/addon/detoxer"
+                        timePeriod="2023"
+                    ></Project>
+                    <Project
                         title="Project Sailor"
                         position="Software development"
                         timePeriod="WIP"
