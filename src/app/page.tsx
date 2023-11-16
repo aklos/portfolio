@@ -8,7 +8,7 @@ export default function Home() {
         <div>
             <section className="mb-16">
                 <Splash />
-                <div className="bg-blue-50 p-4 text-center md:text-left">
+                <div className="bg-blue-50 dark:bg-violet-700 p-4 text-center md:text-left">
                     <PiCaretRightBold className="mr-1 mb-1 hidden md:inline-block" />
                     <span>
                         Currently busy! But if you want to get in touch, send me
@@ -17,7 +17,7 @@ export default function Home() {
                 </div>
             </section>
             <div className="grid md:grid-cols-2 gap-16 mb-16 px-4 md:px-0">
-                <section className="prose max-w-screen-md">
+                <section className="prose dark:prose-invert max-w-screen-md">
                     <p>
                         Hi! I'm an experienced <b>full-stack web</b> and{" "}
                         <b>independent game developer</b> who thrives on
@@ -40,7 +40,7 @@ export default function Home() {
                         tools, services, and games that offer great experiences.
                     </p>
                 </section>
-                <div className="prose">
+                <div className="prose dark:prose-invert">
                     <h3>My services:</h3>
                     <ul>
                         <li>
@@ -58,8 +58,8 @@ export default function Home() {
                     <p></p>
                 </div>
             </div>
-            <div className="border-b my-16"></div>
-            <section className="mb-16 prose max-w-none px-4 md:px-0">
+            <div className="border-b dark:opacity-10 my-16"></div>
+            <section className="mb-16 prose dark:prose-invert max-w-none px-4 md:px-0">
                 <h3>Projects & Clients</h3>
                 <div className="mt-8 grid md:grid-cols-4 gap-16">
                     <Project
@@ -111,8 +111,8 @@ export default function Home() {
                     ></Project>
                 </div>
             </section>
-            <div className="border-b my-16"></div>
-            <section className="mb-16 prose max-w-none px-4 md:px-0">
+            <div className="border-b dark:opacity-10 my-16"></div>
+            <section className="mb-16 prose dark:prose-invert max-w-none px-4 md:px-0">
                 <h3>Experience</h3>
                 <div className="grid md:grid-cols-3 gap-16">
                     <Project

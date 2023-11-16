@@ -1,6 +1,6 @@
 export default function DetoxerPrivacy() {
     return (
-        <div className="prose py-16">
+        <div className="prose dark:prose-invert py-16">
             <h3>Privacy Policy - Detoxer</h3>
             <p>
                 This Privacy Policy document contains types of information that

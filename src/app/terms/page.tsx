@@ -1,6 +1,6 @@
 export default function Terms() {
     return (
-        <div className="prose py-16">
+        <div className="prose dark:prose-invert py-16">
             <h3>Terms of Service</h3>
             <ol>
                 <li>

@@ -39,8 +39,11 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={`${roboto.className} bg`}>
-                <main className="container px-0 md:px-8">
+            <body
+                className={`${roboto.className} relative dark:text-gray-200 dark:bg-zinc-900`}
+            >
+                <div className="absolute w-full h-full bg mix-blend-multiply dark:mix-blend-overlay pointer-events-none" />
+                <main className="relative z-1 container px-0 md:px-8">
                     <nav className="w-full h-[54px] flex items-center px-4 md:px-0">
                         <div
                             className={`w-full flex items-center justify-between ${rubik.className}`}
