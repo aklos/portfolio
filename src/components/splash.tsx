@@ -1,62 +1,142 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useEffect, useState } from "react";
 import * as THREE from "three";
-import vertexShader from "@/shaders/vertex.glsl";
-import fragmentShader from "@/shaders/fragment.glsl";
-import { useTexture } from "@react-three/drei";
-import { Rubik } from "next/font/google";
-import Image from "next/image";
 
-const rubik = Rubik({
-    subsets: ["latin"],
-});
+const vertexShader = `
+varying vec2 vUv;
+void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+
+const fragmentShader = `
+precision highp float;
+
+uniform float iTime;
+uniform vec2 iResolution;
+uniform float isDark;
+
+varying vec2 vUv;
+
+#define PI 3.14159265359
+
+// Rotation matrix
+mat2 rot(float a) {
+    float c = cos(a);
+    float s = sin(a);
+    return mat2(c, -s, s, c);
+}
+
+// Create wireframe grid
+float wireframe(vec2 uv, float thickness) {
+    vec2 grid = abs(fract(uv) - 0.5);
+    return smoothstep(0.0, thickness, min(grid.x, grid.y));
+}
+
+// Create diagonal wireframe
+float diagonalWire(vec2 uv, float thickness) {
+    vec2 grid = abs(fract(uv + uv.yx) - 0.5);
+    return smoothstep(0.0, thickness, min(grid.x, grid.y));
+}
+
+void main() {
+    vec2 uv = vUv;
+    float time = iTime * 0.1;
+    
+    // Center and scale
+    uv = (uv - 0.5) * 2.0;
+    uv.x *= iResolution.x / iResolution.y;
+    
+    // Apply slow rotation
+    uv *= rot(time * 0.3);
+    
+    // Create multiple grid layers
+    float grid1 = wireframe(uv * 8.0, 0.02);
+    float grid2 = wireframe(uv * 4.0 + time, 0.03);
+    float grid3 = diagonalWire(uv * 6.0 - time * 0.5, 0.025);
+    
+    // Create hexagonal pattern
+    vec2 hexUV = uv * 5.0;
+    hexUV *= rot(time * 0.2);
+    vec2 hexGrid = abs(fract(hexUV) - 0.5);
+    float hex = smoothstep(0.0, 0.03, min(hexGrid.x, hexGrid.y));
+    
+    // Combine all patterns
+    float pattern = 1.0 - min(min(grid1, grid2), min(grid3, hex));
+    
+    // Add radial fade
+    float radius = length(uv);
+    float fade = 1.0 - smoothstep(1.0, 2.0, radius);
+    pattern *= fade;
+    
+    // Color based on dark/light mode
+    vec3 color;
+    if (isDark > 0.5) {
+        // Dark mode - bright cyan lines
+        color = vec3(0.0, 0.8, 1.0) * pattern;
+    } else {
+        // Light mode - dark lines
+        color = vec3(0.2, 0.3, 0.5) * pattern;
+    }
+    
+    // Add subtle glow effect
+    color += color * 0.3 * (1.0 - pattern);
+    
+    gl_FragColor = vec4(color, pattern * 0.4);
+}
+`;
 
 function Scene() {
-    const meshRef = useRef(null);
-    const { size } = useThree();
+    const meshRef = useRef<THREE.Mesh>(null);
+    const { size, viewport } = useThree();
+    const [isDark, setIsDark] = useState(false);
 
-    const dims = {
-        width: size.width / 32,
-        height: size.height / 32,
-    };
+    // Check for dark mode
+    useEffect(() => {
+        const checkDarkMode = () => {
+            setIsDark(document.documentElement.classList.contains("dark"));
+        };
 
-    const noiseTexture = useTexture("noise.jpg");
+        checkDarkMode();
 
-    useFrame((state) => {
-        let time = state.clock.getElapsedTime();
+        const observer = new MutationObserver(checkDarkMode);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
 
-        // start from 20 to skip first 20 seconds ( optional )
-        (meshRef.current as any).material.uniforms.iTime.value = time + 20;
-    });
+        return () => observer.disconnect();
+    }, []);
 
     const uniforms = useMemo(
         () => ({
-            iTime: {
-                type: "f",
-                value: 1.0,
-            },
-            iResolution: {
-                type: "v2",
-                value: new THREE.Vector2(dims.width, dims.height),
-            },
-            iChannel0: {
-                type: "t",
-                value: noiseTexture,
-            },
+            iTime: { value: 0.0 },
+            iResolution: { value: new THREE.Vector2(size.width, size.height) },
+            isDark: { value: isDark ? 1.0 : 0.0 },
         }),
-        []
+        [size.width, size.height, isDark]
     );
 
+    useFrame((state) => {
+        if (meshRef.current && meshRef.current.material) {
+            const material = meshRef.current.material as THREE.ShaderMaterial;
+            material.uniforms.iTime.value = state.clock.getElapsedTime();
+            material.uniforms.isDark.value = isDark ? 1.0 : 0.0;
+        }
+    });
+
     return (
-        <mesh ref={meshRef}>
-            <planeGeometry args={[dims.width, dims.height]} />
+        <mesh ref={meshRef} scale={[viewport.width, viewport.height, 1]}>
+            <planeGeometry args={[1, 1]} />
             <shaderMaterial
                 uniforms={uniforms}
                 vertexShader={vertexShader}
                 fragmentShader={fragmentShader}
-                side={THREE.DoubleSide}
+                transparent={true}
+                blending={THREE.AdditiveBlending}
             />
         </mesh>
     );
@@ -64,16 +144,10 @@ function Scene() {
 
 export default function Splash() {
     return (
-        <div className="relative">
-            <Canvas
-                className="bg-gray-200"
-                style={{ width: "100%", height: "300px" }}
-            >
+        <div className="absolute inset-0 w-full h-full dark:opacity-30">
+            <Canvas camera={{ position: [0, 0, 1] }}>
                 <Scene />
             </Canvas>
-            <div className="absolute font-bold top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                <Image src="/logo.svg" alt="logo" width={150} height={100} />
-            </div>
         </div>
     );
 }

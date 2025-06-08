@@ -1,141 +1,232 @@
-import Email from "@/components/email";
-import Project from "@/components/project";
+import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import Splash from "@/components/splash";
-import { PiCaretRightBold } from "react-icons/pi";
+
+const projects = [
+    {
+        name: "Scryer",
+        type: "Shopify App",
+        year: "2025",
+        link: "https://scryerapp.io",
+        desc: "AI analyst for Shopify stores",
+    },
+    {
+        name: "Detoxer",
+        type: "Browser Extension",
+        year: "2023",
+        link: "https://addons.mozilla.org/en-US/firefox/addon/detoxer",
+        desc: "Firefox extension for social media detox",
+    },
+    // {
+    //     name: "Project Sailor",
+    //     type: "Game",
+    //     year: "WIP",
+    //     link: null,
+    //     desc: "Indie game project in development",
+    // },
+    {
+        name: "CNTRC AI",
+        type: "Platform",
+        year: "2023",
+        link: "https://www.cntrc.ai/",
+        desc: "Long-term visitor analytics platform",
+    },
+    {
+        name: "Next Chapter",
+        type: "Website",
+        year: "2023",
+        link: "https://www.nextchapter.agency/en",
+        desc: "Agency website with modern design",
+    },
+    {
+        name: "Hoorcentrum Aerts",
+        type: "Website",
+        year: "2023",
+        link: "https://hoorcentrumaerts.be/",
+        desc: "Healthcare website for audiology practice",
+    },
+    {
+        name: "Slogidex",
+        type: "Tool",
+        year: "2023",
+        link: "https://github.com/aklos/slogidex",
+        desc: "Process management tool",
+    },
+    {
+        name: "This Machine Greens",
+        type: "Website",
+        year: "2021",
+        link: "https://thismachinegreens.com/",
+        desc: "Interactive website with VFX",
+    },
+    // {
+    //     name: "RiskXchange",
+    //     type: "Platform",
+    //     year: "2020",
+    //     link: "https://riskxchange.co/",
+    //     desc: "Cybersecurity risk management platform",
+    // },
+];
+
+const experience = [
+    {
+        company: "Freelancing",
+        role: "Software Engineer",
+        period: "2020-2025",
+    },
+    {
+        company: "Bulb Energy",
+        type: "London, UK",
+        role: "Software Engineer",
+        period: "2019-2020",
+    },
+    {
+        company: "Motorway",
+        type: "London, UK",
+        role: "Software Engineer",
+        period: "2017-2019",
+    },
+    {
+        company: "SSK",
+        type: "Wroclaw, Poland",
+        role: "Junior Software Engineer",
+        period: "2013-2017",
+    },
+];
 
 export default function Home() {
     return (
-        <div>
-            <section className="mb-16">
+        <div className="min-h-screen">
+            {/* Hero */}
+            <section className="relative h-screen flex items-center justify-center overflow-hidden">
                 <Splash />
-                <div className="bg-blue-50 dark:bg-violet-700 p-4 text-center md:text-left">
-                    <PiCaretRightBold className="mr-1 mb-1 hidden md:inline-block" />
-                    <span>
-                        Currently busy! But if you want to get in touch, send me
-                        an email: <Email />
-                    </span>
+
+                {/* Hero Content */}
+                <div className="relative z-20 text-center">
+                    <h1 className="text-6xl font-bold mb-4 text-gray-900 dark:text-white">
+                        Alex Klos / Prohobo
+                    </h1>
+                    <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                        Software developer
+                    </p>
+                    <div className="flex gap-4 justify-center items-center">
+                        <a
+                            href="https://github.com/aklos"
+                            className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-200"
+                        >
+                            <AiFillGithub className="text-xl" />
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/alexander-klos-460787120"
+                            className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-200"
+                        >
+                            <AiFillLinkedin className="text-xl" />
+                        </a>
+                        <a
+                            href="mailto:hello@prohobo.dev"
+                            className="px-4 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 rounded-lg transition-all duration-200 text-sm font-medium"
+                        >
+                            Contact
+                        </a>
+                    </div>
                 </div>
             </section>
-            <div className="grid md:grid-cols-2 gap-16 mb-16 px-4 md:px-0">
-                <section className="prose dark:prose-invert max-w-screen-md">
-                    <p>
-                        Hi! I'm an experienced <b>full-stack web</b> and{" "}
-                        <b>independent game developer</b> who thrives on
-                        creating compelling digital experiences. As a
-                        freelancer, I spend most of my time developing web
-                        applications. I also work on games and desktop/mobile
-                        applications when the opportunity arises.
+
+            {/* Content overlapping splash */}
+            <section className="relative -mt-48 z-30 max-w-4xl mx-auto px-6">
+                {/* About */}
+                {/* <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg rounded-2xl p-8 mb-8 border border-gray-200/50 dark:border-gray-700/50">
+                    <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                        I'm an experienced full-stack web and independent game
+                        developer. As a freelancer, I develop web applications,
+                        games, and desktop/mobile apps. My tech stack includes
+                        TypeScript, Python, and Rust.
                     </p>
-                    <p>
-                        My tech stack includes <b>Typescript</b>, <b>Python</b>,
-                        and <b>Rust</b>. I'm currently studying{" "}
-                        <b>deep neural networks</b>. Regardless of the platform
-                        (AWS, Fly.io, Heroku, etc.), I handle my own deployments
-                        so that the products I develop are always performing at
-                        their best.
-                    </p>
-                    <p>
-                        My goal is not to master a long list of frameworks and
-                        technologies, but to utilize them effectively to build
-                        tools, services, and games that offer great experiences.
-                    </p>
-                </section>
-                <div className="prose dark:prose-invert">
-                    <h3>My services:</h3>
-                    <ul>
-                        <li>
-                            Web development (marketing, CMS, APIs, dashboards)
-                        </li>
-                        <li>
-                            Scripting (data processing, neural networks,
-                            automation)
-                        </li>
-                        <li>
-                            Desktop applications (tooling, clients, automation)
-                        </li>
-                        <li>Technical consultations</li>
-                    </ul>
-                    <p></p>
+                </div> */}
+
+                {/* Projects */}
+                <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg rounded-2xl p-8 mb-8 border border-gray-200/50 dark:border-gray-700/50">
+                    <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">
+                        Projects
+                    </h2>
+                    <div className="space-y-6">
+                        {projects.map((project, i) => (
+                            <div
+                                key={i}
+                                className="flex items-start justify-between py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
+                            >
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-1">
+                                        <h3 className="font-medium text-gray-900 dark:text-white">
+                                            {project.name}
+                                        </h3>
+                                        <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded">
+                                            {project.type}
+                                        </span>
+                                    </div>
+                                    {project.desc && (
+                                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                                            {project.desc}
+                                        </p>
+                                    )}
+                                </div>
+                                <div className="flex items-center gap-4 ml-4">
+                                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                                        {project.year}
+                                    </span>
+                                    {project.link && (
+                                        <a
+                                            href={project.link}
+                                            className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-sm transition-colors"
+                                        >
+                                            View →
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
-            <div className="border-b dark:opacity-10 my-16"></div>
-            <section className="mb-16 prose dark:prose-invert max-w-none px-4 md:px-0">
-                <h3>Projects & Clients</h3>
-                <div className="mt-8 grid md:grid-cols-4 gap-16">
-                    <Project
-                        title="Detoxer"
-                        position="Software development"
-                        link="https://addons.mozilla.org/en-US/firefox/addon/detoxer"
-                        timePeriod="2023"
-                    ></Project>
-                    <Project
-                        title="Project Sailor"
-                        position="Software development"
-                        timePeriod="WIP"
-                    ></Project>
-                    <Project
-                        title="CNTRC AI"
-                        position="Software development"
-                        link="https://www.cntrc.ai/"
-                        timePeriod="2023"
-                    ></Project>
-                    <Project
-                        title="Next Chapter"
-                        position="Web design & development"
-                        link="https://www.nextchapter.agency/en"
-                        timePeriod="2023"
-                    ></Project>
-                    <Project
-                        title="Hoorcentrum Aerts"
-                        position="Web design & development"
-                        link="https://hoorcentrumaerts.be/"
-                        timePeriod="2023"
-                    ></Project>
-                    <Project
-                        title="Slogidex"
-                        position="Software development"
-                        link="https://github.com/aklos/slogidex"
-                        timePeriod="2023"
-                    ></Project>
-                    <Project
-                        title="This Machine Greens"
-                        position="Web design, development, and VFX"
-                        link="https://thismachinegreens.com/"
-                        timePeriod="2021"
-                    ></Project>
-                    <Project
-                        title="RiskXchange"
-                        position="Software development"
-                        link="https://riskxchange.co/"
-                        timePeriod="2020"
-                    ></Project>
+
+                {/* Experience */}
+                <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg rounded-2xl p-8 mb-16 border border-gray-200/50 dark:border-gray-700/50">
+                    <h2 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">
+                        Roles
+                    </h2>
+                    <div className="space-y-4">
+                        {experience.map((job, i) => (
+                            <div
+                                key={i}
+                                className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
+                            >
+                                <div>
+                                    <div className="flex items-center gap-3 mb-1">
+                                        <h3 className="font-medium text-gray-900 dark:text-white">
+                                            {job.company}
+                                        </h3>
+                                        {job.type ? (
+                                            <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded">
+                                                {job.type}
+                                            </span>
+                                        ) : null}
+                                    </div>
+                                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                                        {job.role}
+                                    </p>
+                                </div>
+                                <span className="text-sm text-gray-500 dark:text-gray-400">
+                                    {job.period}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
-            <div className="border-b dark:opacity-10 my-16"></div>
-            <section className="mb-16 prose dark:prose-invert max-w-none px-4 md:px-0">
-                <h3>Experience</h3>
-                <div className="grid md:grid-cols-3 gap-16">
-                    <Project
-                        title="Bulb Energy"
-                        image="/bulb.jpg"
-                        timePeriod="Q1 2019 - Q2 2020"
-                        position="Software engineer"
-                    ></Project>
-                    <Project
-                        title="Motorway"
-                        image="/motorway.png"
-                        timePeriod="Q2 2017 - Q1 2019"
-                        position="Software engineer"
-                        link="https://motorway.co.uk/"
-                    ></Project>
-                    <Project
-                        title="SSK"
-                        image="/surfland.jpg"
-                        timePeriod="Q1 2013 - Q1 2017"
-                        position="Junior software engineer"
-                    ></Project>
-                </div>
-            </section>
+
+            {/* Footer */}
+            <footer className="text-center py-12 text-sm text-gray-500 dark:text-gray-400">
+                <div>Copyright © Alexander Klos</div>
+                <div>Suite 59, 30 Durham Road, London, SW20 0TW</div>
+            </footer>
         </div>
     );
 }
