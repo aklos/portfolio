@@ -1,5 +1,6 @@
-import { AiFillGithub, AiFillLinkedin, AiFillX } from "react-icons/ai";
+import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import Splash from "@/components/splash";
+import { RiTwitterXFill } from "react-icons/ri";
 
 const projects = [
     {
@@ -125,7 +126,7 @@ export default function Home() {
                             href="https://x.com/alexmklos"
                             className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white transition-all duration-200"
                         >
-                            <AiFillX className="text-xl" />
+                            <RiTwitterXFill className="text-xl dark:fill-gray-300" />
                         </a>
                         <a
                             href="mailto:hello@prohobo.dev"
