@@ -144,7 +144,7 @@ function Scene() {
 
 export default function Splash() {
     return (
-        <div className="absolute inset-0 w-full h-full dark:opacity-30">
+        <div className="absolute inset-0 w-full h-full dark:opacity-40">
             <Canvas camera={{ position: [0, 0, 1] }}>
                 <Scene />
             </Canvas>
