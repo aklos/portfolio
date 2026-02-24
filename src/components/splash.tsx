@@ -23,20 +23,17 @@ varying vec2 vUv;
 
 #define PI 3.14159265359
 
-// Rotation matrix
 mat2 rot(float a) {
     float c = cos(a);
     float s = sin(a);
     return mat2(c, -s, s, c);
 }
 
-// Create wireframe grid
 float wireframe(vec2 uv, float thickness) {
     vec2 grid = abs(fract(uv) - 0.5);
     return smoothstep(0.0, thickness, min(grid.x, grid.y));
 }
 
-// Create diagonal wireframe
 float diagonalWire(vec2 uv, float thickness) {
     vec2 grid = abs(fract(uv + uv.yx) - 0.5);
     return smoothstep(0.0, thickness, min(grid.x, grid.y));
@@ -45,47 +42,40 @@ float diagonalWire(vec2 uv, float thickness) {
 void main() {
     vec2 uv = vUv;
     float time = iTime * 0.1;
-    
-    // Center and scale
+
     uv = (uv - 0.5) * 2.0;
     uv.x *= iResolution.x / iResolution.y;
-    
-    // Apply slow rotation
+
     uv *= rot(time * 0.3);
-    
-    // Create multiple grid layers
+
     float grid1 = wireframe(uv * 8.0, 0.02);
     float grid2 = wireframe(uv * 4.0 + time, 0.03);
     float grid3 = diagonalWire(uv * 6.0 - time * 0.5, 0.025);
-    
-    // Create hexagonal pattern
+
     vec2 hexUV = uv * 5.0;
     hexUV *= rot(time * 0.2);
     vec2 hexGrid = abs(fract(hexUV) - 0.5);
     float hex = smoothstep(0.0, 0.03, min(hexGrid.x, hexGrid.y));
-    
-    // Combine all patterns
+
     float pattern = 1.0 - min(min(grid1, grid2), min(grid3, hex));
-    
-    // Add radial fade
+
     float radius = length(uv);
     float fade = 1.0 - smoothstep(1.0, 2.0, radius);
     pattern *= fade;
-    
-    // Color based on dark/light mode
+
+    // Patent drawing warm palette
     vec3 color;
     if (isDark > 0.5) {
-        // Dark mode - bright cyan lines
-        color = vec3(0.0, 0.8, 1.0) * pattern;
+        // Dark mode — chalk/warm white lines on charcoal
+        vec3 chalkColor = vec3(0.91, 0.89, 0.86); // #e8e4dc
+        color = chalkColor * pattern * 0.35;
     } else {
-        // Light mode - dark lines
-        color = vec3(0.2, 0.3, 0.5) * pattern;
+        // Light mode — warm sepia/ink lines on cream
+        vec3 inkColor = vec3(0.42, 0.39, 0.34); // warm brown-gray
+        color = inkColor * pattern * 0.5;
     }
-    
-    // Add subtle glow effect
-    color += color * 0.3 * (1.0 - pattern);
-    
-    gl_FragColor = vec4(color, pattern * 0.4);
+
+    gl_FragColor = vec4(color, pattern * 0.3);
 }
 `;
 
@@ -94,21 +84,19 @@ function Scene() {
     const { size, viewport } = useThree();
     const [isDark, setIsDark] = useState(false);
 
-    // Check for dark mode
     useEffect(() => {
         const checkDarkMode = () => {
-            setIsDark(document.documentElement.classList.contains("dark"));
+            setIsDark(
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+            );
         };
 
         checkDarkMode();
 
-        const observer = new MutationObserver(checkDarkMode);
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ["class"],
-        });
+        const mq = window.matchMedia("(prefers-color-scheme: dark)");
+        mq.addEventListener("change", checkDarkMode);
 
-        return () => observer.disconnect();
+        return () => mq.removeEventListener("change", checkDarkMode);
     }, []);
 
     const uniforms = useMemo(
@@ -144,7 +132,7 @@ function Scene() {
 
 export default function Splash() {
     return (
-        <div className="absolute inset-0 w-full h-full dark:opacity-40">
+        <div className="absolute inset-0 w-full h-full opacity-60 dark:opacity-30">
             <Canvas camera={{ position: [0, 0, 1] }}>
                 <Scene />
             </Canvas>
