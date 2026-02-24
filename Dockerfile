@@ -12,6 +12,9 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
+# Install pnpm
+RUN npm install -g pnpm
+
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
@@ -21,17 +24,17 @@ RUN apt-get update -qq && \
     apt-get install -y build-essential pkg-config python-is-python3
 
 # Install node modules
-COPY --link package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --production=false
+COPY --link package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 # Copy application code
 COPY --link . .
 
 # Build application
-RUN yarn run build
+RUN pnpm run build
 
 # Remove development dependencies
-RUN yarn install --production=true
+RUN pnpm prune --prod
 
 
 # Final stage for app image
@@ -42,4 +45,4 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "yarn", "run", "start" ]
+CMD [ "pnpm", "run", "start" ]
