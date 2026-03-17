@@ -5,10 +5,10 @@ const projects = [
         name: "Scryer",
         type: "Desktop App",
         year: "2026",
-        link: "https://scryer.sh",
+        link: "https://github.com/aklos/scryer",
         desc: "Visual architecture planner for AI coding assistants",
     },
-{
+    {
         name: "FLIP Water Sim",
         type: "Godot Extension",
         year: "2024",
