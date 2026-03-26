@@ -82,10 +82,10 @@ export default function RootLayout({
                             </Link>
                             <span className="w-px h-4 bg-[var(--color-patent-line)] dark:bg-[var(--color-patent-dark-line)]" />
                             <a
-                                href="mailto:hello@prohobo.dev"
+                                href="mailto:alex@prohobo.dev"
                                 className="text-sm text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
                             >
-                                hello@prohobo.dev
+                                alex@prohobo.dev
                             </a>
                         </div>
                     </div>
