@@ -12,8 +12,8 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
-# Install pnpm
-RUN npm install -g pnpm
+# Install pnpm (pinned; unpinned versions drift from the lockfile/config behavior)
+RUN npm install -g pnpm@10.26.1
 
 
 # Throw-away build stage to reduce size of final image
