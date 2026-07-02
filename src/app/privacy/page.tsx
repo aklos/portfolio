@@ -1,6 +1,6 @@
 export default function Privacy() {
     return (
-        <div className="prose dark:prose-invert py-16">
+        <div className="prose max-w-4xl mx-auto px-6 py-16">
             <h3>Privacy Policy</h3>
             <ol>
                 <li>

@@ -9,28 +9,29 @@ export default function GithubContributions() {
 
     useEffect(() => {
         setMounted(true);
-        const mq = window.matchMedia("(prefers-color-scheme: dark)");
-        setColorScheme(mq.matches ? "dark" : "light");
-        const handler = (e: MediaQueryListEvent) =>
-            setColorScheme(e.matches ? "dark" : "light");
-        mq.addEventListener("change", handler);
-        return () => mq.removeEventListener("change", handler);
+        const root = document.documentElement;
+        const read = () =>
+            setColorScheme(root.classList.contains("dark") ? "dark" : "light");
+        read();
+        const observer = new MutationObserver(read);
+        observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+        return () => observer.disconnect();
     }, []);
 
     if (!mounted) return null;
 
-    const lightTheme = {
-        dark: ["#e5e0d5", "#c6d9a8", "#93b86a", "#5f9330", "#3d6b1b"],
-        light: ["#e5e0d5", "#c6d9a8", "#93b86a", "#5f9330", "#3d6b1b"],
+    const theme = {
+        light: ["#eef3fb", "#b3cdf1", "#7fabe8", "#4a86de", "#1d5fce"],
+        dark: ["#16273f", "#24406a", "#33589a", "#4a79cd", "#6fa3f0"],
     };
 
     return (
-        <div className="github-calendar max-w-4xl mx-auto px-6 pb-12">
+        <div className="github-calendar">
             <GitHubCalendar
                 username="aklos"
                 colorScheme={colorScheme}
                 fontSize={12}
-                theme={colorScheme === "light" ? lightTheme : undefined}
+                theme={theme}
             />
         </div>
     );

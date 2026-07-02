@@ -1,20 +1,54 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@theme {
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    /* light theme */
+    --theme-paper: #ffffff;
+    --theme-ink: #16324f;
+    --theme-blue: #2d6bd8;
+    --theme-orange: #f07f23;
+    --theme-muted: #5d7290;
+    --theme-line: #dce3ee;
+    --theme-mist: #eef3fb;
+}
+
+.dark {
+    /* dark theme — deep navy, not black */
+    --theme-paper: #0e1c30;
+    --theme-ink: #e9eef5;
+    --theme-blue: #6fa3f0;
+    --theme-orange: #ff9b4a;
+    --theme-muted: #8fa3bd;
+    --theme-line: #24344d;
+    --theme-mist: #16273f;
+}
+
+@theme inline {
     --container-2xl: 1400px;
 
-    --color-patent-bg: #f0ece2;
-    --color-patent-fg: #1a1a1a;
-    --color-patent-line: #c0b8a8;
-    --color-patent-muted: #8a8272;
-    --color-patent-accent: #6b6355;
+    --color-paper: var(--theme-paper);
+    --color-ink: var(--theme-ink);
+    --color-blue: var(--theme-blue);
+    --color-orange: var(--theme-orange);
+    --color-muted: var(--theme-muted);
+    --color-line: var(--theme-line);
+    --color-mist: var(--theme-mist);
 
-    --color-patent-dark-bg: #121417;
-    --color-patent-dark-fg: #e8e4dc;
-    --color-patent-dark-line: #4a4a50;
-    --color-patent-dark-muted: #8a8a90;
-    --color-patent-dark-accent: #b0aca4;
+    --font-display: var(--font-league-spartan);
+    --font-body: var(--font-mulish);
+    --font-mono: var(--font-dm-mono);
+}
+
+@theme {
+    --animate-wave: wave 0.6s linear infinite;
+
+    @keyframes wave {
+        to {
+            transform: translateX(-12px);
+        }
+    }
 }
 
 @utility container {
@@ -23,13 +57,29 @@
 }
 
 body {
-    background-color: var(--color-patent-bg);
+    background-color: var(--theme-paper);
+    color: var(--theme-ink);
 }
 
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: var(--color-patent-dark-bg);
-    }
+/* Point typography plugin colors at theme vars so prose follows the theme
+   without prose-invert */
+.prose {
+    --tw-prose-body: color-mix(in srgb, var(--theme-ink) 88%, transparent);
+    --tw-prose-headings: var(--theme-ink);
+    --tw-prose-lead: var(--theme-muted);
+    --tw-prose-links: var(--theme-blue);
+    --tw-prose-bold: var(--theme-ink);
+    --tw-prose-counters: var(--theme-muted);
+    --tw-prose-bullets: var(--theme-orange);
+    --tw-prose-hr: var(--theme-line);
+    --tw-prose-quotes: var(--theme-muted);
+    --tw-prose-quote-borders: var(--theme-orange);
+    --tw-prose-captions: var(--theme-muted);
+    --tw-prose-code: var(--theme-ink);
+    --tw-prose-pre-code: var(--theme-ink);
+    --tw-prose-pre-bg: var(--theme-mist);
+    --tw-prose-th-borders: var(--theme-line);
+    --tw-prose-td-borders: var(--theme-line);
 }
 
 .github-calendar svg.react-activity-calendar__calendar {

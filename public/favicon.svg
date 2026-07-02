@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#121417"/>
-  <text x="16" y="22" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#e8e4dc" text-anchor="middle">AK</text>
+  <rect width="32" height="32" rx="6" fill="#2d6bd8"/>
+  <text x="16" y="21" font-family="Avenir, 'Century Gothic', Futura, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">AK</text>
+  <rect x="9" y="24" width="14" height="3" rx="1.5" fill="#f07f23"/>
 </svg>

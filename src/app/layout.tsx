@@ -1,20 +1,28 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { IBM_Plex_Serif, IBM_Plex_Mono } from "next/font/google";
+import { League_Spartan, Mulish, DM_Mono } from "next/font/google";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 import { RiTwitterXFill } from "react-icons/ri";
+import ThemeToggle from "@/components/theme-toggle";
+import Pattern from "@/components/pattern";
 
-const plexSerif = IBM_Plex_Serif({
+const leagueSpartan = League_Spartan({
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-    variable: "--font-serif",
+    weight: ["500", "600", "700", "800"],
+    variable: "--font-league-spartan",
 });
 
-const plexMono = IBM_Plex_Mono({
+const mulish = Mulish({
     subsets: ["latin"],
-    weight: ["300", "400", "500"],
-    variable: "--font-mono",
+    weight: ["400", "500", "600", "700"],
+    variable: "--font-mulish",
+});
+
+const dmMono = DM_Mono({
+    subsets: ["latin"],
+    weight: ["400", "500"],
+    variable: "--font-dm-mono",
 });
 
 export const metadata: Metadata = {
@@ -25,99 +33,103 @@ export const metadata: Metadata = {
     },
 };
 
+const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})()`;
+
+const navLink =
+    "relative text-sm text-muted hover:text-ink transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-orange after:scale-x-0 after:origin-left hover:after:scale-x-100 motion-safe:after:transition-transform after:duration-200";
+
 export default function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
+            <head>
+                <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+            </head>
             <body
-                className={`${plexSerif.variable} ${plexMono.variable} font-[family-name:var(--font-mono)] bg-[var(--color-patent-bg)] dark:bg-[var(--color-patent-dark-bg)] text-[var(--color-patent-fg)] dark:text-[var(--color-patent-dark-fg)]`}
+                className={`${leagueSpartan.variable} ${mulish.variable} ${dmMono.variable} font-body bg-paper text-ink`}
             >
-                <header className="max-w-4xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16">
-                    <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-                        <div className="flex items-center gap-5">
-                            <img
-                                src="/face.png"
-                                alt="Alex Klos"
-                                className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border border-[var(--color-patent-line)] dark:border-[var(--color-patent-dark-line)]"
+                <header className="max-w-4xl mx-auto px-6 py-6 flex items-center justify-between gap-4">
+                    <Link
+                        href="/"
+                        className="group relative inline-block font-display font-bold text-xl tracking-tight hover:text-blue transition-colors"
+                    >
+                        Alex Klos
+                        <span className="absolute left-0 right-0 -bottom-1 h-[6px] overflow-hidden">
+                            <Pattern
+                                variant="wave"
+                                className="absolute left-0 top-0 h-full w-[calc(100%+12px)] text-orange motion-safe:group-hover:animate-wave"
                             />
-                            <div>
-                                <Link href="/">
-                                    <h1 className="font-[family-name:var(--font-serif)] text-4xl md:text-5xl font-bold mb-2 text-[var(--color-patent-fg)] dark:text-[var(--color-patent-dark-fg)] tracking-tight">
-                                        Alex Klos
-                                    </h1>
-                                </Link>
-                                <p className="text-sm text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)]">
-                                    Software Engineer
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex gap-5 items-center">
-                            <a
-                                href="https://github.com/aklos"
-                                className="text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
-                            >
-                                <AiFillGithub className="text-lg" />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/alexander-klos-460787120"
-                                className="text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
-                            >
-                                <AiFillLinkedin className="text-lg" />
-                            </a>
-                            <a
-                                href="https://x.com/alexmklos"
-                                className="text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
-                            >
-                                <RiTwitterXFill className="text-base" />
-                            </a>
-                            <span className="w-px h-4 bg-[var(--color-patent-line)] dark:bg-[var(--color-patent-dark-line)]" />
-                            <Link
-                                href="/blog"
-                                className="text-sm text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
-                            >
-                                Blog
-                            </Link>
-                            <span className="w-px h-4 bg-[var(--color-patent-line)] dark:bg-[var(--color-patent-dark-line)]" />
-                            <a
-                                href="mailto:alex@prohobo.dev"
-                                className="text-sm text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
-                            >
-                                alex@prohobo.dev
-                            </a>
-                        </div>
-                    </div>
+                        </span>
+                    </Link>
+                    <nav className="flex gap-5 items-center">
+                        <Link href="/blog" className={navLink}>
+                            Blog
+                        </Link>
+                        <a
+                            href="mailto:alex@prohobo.dev"
+                            className={`${navLink} hidden sm:inline-block`}
+                        >
+                            alex@prohobo.dev
+                        </a>
+                        <span className="w-px h-4 bg-line" />
+                        <a
+                            href="https://github.com/aklos"
+                            aria-label="GitHub"
+                            className="text-muted hover:text-ink transition-colors"
+                        >
+                            <AiFillGithub className="text-lg" />
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/alexander-klos-460787120"
+                            aria-label="LinkedIn"
+                            className="text-muted hover:text-ink transition-colors"
+                        >
+                            <AiFillLinkedin className="text-lg" />
+                        </a>
+                        <a
+                            href="https://x.com/alexmklos"
+                            aria-label="X"
+                            className="text-muted hover:text-ink transition-colors"
+                        >
+                            <RiTwitterXFill className="text-base" />
+                        </a>
+                        <span className="w-px h-4 bg-line" />
+                        <ThemeToggle />
+                    </nav>
                 </header>
                 {children}
                 <footer className="max-w-4xl mx-auto px-6 pb-16">
-                    <div className="border-t border-[var(--color-patent-line)] dark:border-[var(--color-patent-dark-line)] pt-8 flex items-center justify-between text-xs text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)]">
+                    <Pattern
+                        variant="stripes"
+                        className="w-full h-1.5 text-line"
+                    />
+                    <div className="pt-8 flex items-center justify-between text-xs text-muted">
                         <div className="flex gap-5 items-center">
                             <a
                                 href="https://github.com/aklos"
-                                className="hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
+                                className="hover:text-ink transition-colors"
                             >
                                 <AiFillGithub className="text-lg" />
                             </a>
                             <a
                                 href="https://www.linkedin.com/in/alexander-klos-460787120"
-                                className="hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
+                                className="hover:text-ink transition-colors"
                             >
                                 <AiFillLinkedin className="text-lg" />
                             </a>
                             <a
                                 href="https://x.com/alexmklos"
-                                className="hover:text-[var(--color-patent-fg)] dark:hover:text-[var(--color-patent-dark-fg)] transition-colors"
+                                className="hover:text-ink transition-colors"
                             >
                                 <RiTwitterXFill className="text-base" />
                             </a>
                         </div>
-                        <div>
-                            &copy; {new Date().getFullYear()}
-                        </div>
+                        <div>&copy; {new Date().getFullYear()}</div>
                     </div>
-                    <p className="mt-4 text-xs text-[var(--color-patent-muted)]/50 dark:text-[var(--color-patent-dark-muted)]/50">
+                    <p className="mt-4 text-xs text-muted/50">
                         Alexander Klos / Suite 59, 30 Durham Road, London, SW20 0TW
                     </p>
                 </footer>

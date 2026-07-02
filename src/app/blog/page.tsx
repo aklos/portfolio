@@ -1,7 +1,9 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
+import SectionHeading from "@/components/section-heading";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Blog — Alex Klos",
     description: "Writing about software engineering, projects, and more.",
 };
@@ -11,35 +13,28 @@ export default function BlogIndex() {
 
     return (
         <div className="min-h-screen">
-            <section className="max-w-4xl mx-auto px-6 pb-24">
-                <h2 className="font-[family-name:var(--font-serif)] text-2xl font-semibold mb-1 text-[var(--color-patent-fg)] dark:text-[var(--color-patent-dark-fg)]">
-                    Blog
-                </h2>
-                <p className="text-sm text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] mb-8">
-                    Writing about software and more
-                </p>
+            <section className="max-w-4xl mx-auto px-6 pt-10 pb-24">
+                <SectionHeading
+                    title="Blog"
+                    sub="Writing about software and more"
+                />
 
-                <div className="border-t border-[var(--color-patent-line)] dark:border-[var(--color-patent-dark-line)]">
-                    {posts.map((post, i) => (
+                <div className="border-t border-line">
+                    {posts.map((post) => (
                         <Link
                             key={post.slug}
                             href={`/blog/${post.slug}`}
-                            className="group flex items-baseline justify-between py-4 border-b border-[var(--color-patent-line)] dark:border-[var(--color-patent-dark-line)] hover:pl-2 transition-all duration-200"
+                            className="group flex items-baseline justify-between gap-4 py-5 border-b border-line"
                         >
-                            <div className="flex items-baseline gap-4 min-w-0">
-                                <span className="text-xs text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] tabular-nums shrink-0">
-                                    {String(i + 1).padStart(2, "0")}
+                            <div className="min-w-0">
+                                <span className="font-display text-lg font-bold group-hover:text-blue transition-colors block truncate">
+                                    {post.title}
                                 </span>
-                                <div className="min-w-0">
-                                    <span className="font-[family-name:var(--font-serif)] font-medium group-hover:text-[var(--color-patent-accent)] dark:group-hover:text-[var(--color-patent-dark-accent)] transition-colors truncate block">
-                                        {post.title}
-                                    </span>
-                                    <span className="hidden sm:block text-xs text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] truncate">
-                                        {post.description}
-                                    </span>
-                                </div>
+                                <span className="text-sm text-muted truncate block mt-0.5">
+                                    {post.description}
+                                </span>
                             </div>
-                            <span className="text-xs text-[var(--color-patent-muted)] dark:text-[var(--color-patent-dark-muted)] tabular-nums shrink-0 ml-4">
+                            <span className="font-mono text-xs text-muted tabular-nums shrink-0">
                                 {post.date}
                             </span>
                         </Link>
