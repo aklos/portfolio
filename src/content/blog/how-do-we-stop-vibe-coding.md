@@ -148,7 +148,7 @@ So, we have to come back around: TDD solves part of the problem, but only if we 
 
 ## Jigsaw Falling Into Place
 
-The current solutions are inadequate because they don't address the core problem: trust.
+The previous solutions are inadequate because they don't address the core problem: trust.
 
 Yes, they attempt to better align agents to our intent. They try to give an operating procedure to the agent. They even have some basic notion of keeping a history of changes, or tightening the harness (as in the use of hooks.)
 
