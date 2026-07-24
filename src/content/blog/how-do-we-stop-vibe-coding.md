@@ -156,9 +156,11 @@ But it's still a prompt interface - with added ritual as discipline - and readin
 
 And solving this is genuinely hard. It's telling that [Tessl](https://tessl.io/) - which raised $125M on the promise of spec-driven development - has quietly steered away from selling SDD to developers and toward "skills are the new code." Oops?
 
-Luckily, there are new projects being worked on that are learning lessons from what we've been seeing over the past year, and coming up with novel solutions. The space is evolving and the pieces of the puzzle are starting to come together.
+Luckily, the space is evolving and the pieces of the puzzle are starting to come together into solutions that might actually work.
 
-*FWIW, these are the only projects I actually know of that focus on the trust problem - and one of them is mine - but if there are others I'd love to hear about them.*
+The following two projects (disclaimer: one of them is mine) are at least heading in the right direction to address the real issues we have with vibe coding.
+
+*FWIW, these are the only projects I actually know of that focus on the trust problem, but if there are others I'd love to hear about them.*
 
 ### [CodeSpeak](https://codespeak.dev/)
 
