@@ -2,6 +2,7 @@
 title: "How Do We Stop Vibe Coding?"
 date: "2026-07-24"
 description: "Coding agents won the workflow war, but nobody trusts their output. Why specs, skills, and TDD haven't fixed it — and what might."
+toc: true
 ---
 
 When Claude Code blew up in popularity near the end of December 2025, a large portion of software developers quickly shifted to using coding agents as part of their main development workflows.

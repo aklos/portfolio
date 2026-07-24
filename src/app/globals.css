@@ -82,6 +82,16 @@ body {
     --tw-prose-td-borders: var(--theme-line);
 }
 
+/* Anchor navigation: smooth jump, headings land clear of the top edge */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+.prose :is(h2, h3, h4) {
+    scroll-margin-top: 2.5rem;
+}
+
 /* Links: blue, underline only on hover — matches inline links site-wide */
 .prose a {
     text-decoration: none;

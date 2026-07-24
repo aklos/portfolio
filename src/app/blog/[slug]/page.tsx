@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
 import { formatDate, getAllPosts, getPostBySlug } from "@/lib/blog";
+import Toc, { TocList } from "@/components/toc";
 
 export async function generateStaticParams() {
     const posts = getAllPosts();
@@ -48,7 +49,14 @@ export default async function BlogPost({
 
     return (
         <div className="min-h-screen">
-            <div className="max-w-4xl mx-auto px-6 pt-10 pb-24">
+            <div className="relative max-w-4xl mx-auto px-6 pt-10 pb-24">
+                {post.toc && post.toc.length > 0 && (
+                    <aside className="hidden 2xl:block absolute left-full top-0 h-full w-64 ml-12">
+                        <div className="sticky top-10 pt-1">
+                            <Toc entries={post.toc} />
+                        </div>
+                    </aside>
+                )}
                 <Link
                     href="/blog"
                     className="group inline-flex items-center gap-1.5 text-sm text-muted hover:text-blue transition-colors"
@@ -62,6 +70,17 @@ export default async function BlogPost({
                 <p className="font-mono text-xs text-muted mb-12">
                     {formatDate(post.date)}
                 </p>
+
+                {post.toc && post.toc.length > 0 && (
+                    <details className="2xl:hidden -mt-6 mb-12">
+                        <summary className="cursor-pointer font-mono text-xs uppercase tracking-wider text-muted hover:text-blue transition-colors">
+                            On this page
+                        </summary>
+                        <div className="mt-4 text-sm">
+                            <TocList entries={post.toc} />
+                        </div>
+                    </details>
+                )}
 
                 <article
                     className="prose prose-lg prose-headings:font-display max-w-none"
