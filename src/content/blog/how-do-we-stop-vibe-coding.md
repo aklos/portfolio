@@ -25,7 +25,7 @@ Grady Booch, co-creator of UML, actually [argues](https://www.youtube.com/watch?
 
 Booch is careful to note that this third age wasn't started by AI, just accelerated by it. But he also compares AI coding agents to the arrival of compilers in Grace Hopper's time, and that's the comparison that matters here. Compilers abstracted away the machine. Agents abstract away the code itself.
 
-We can now, for the first time ever, generate code by capturing full intent. The lack of this ability was what killed model-driven development back in the day (think what you will about UML, but maybe it's time we thought about bringing MDD back in some form.)
+We can now, for the first time ever, generate code directly from intent. The lack of this ability was what killed model-driven development back in the day (think what you will about UML, but maybe it's time we thought about bringing MDD back in some form.)
 
 Practically, as we move up in abstraction towards intent we lose many of the tools and methods that made working with code a reliable process. If we can adapt, I believe that this shift could potentially not just speed up development, but also vastly improve the quality of software solutions.
 
@@ -156,9 +156,9 @@ But it's still a prompt interface - with added ritual as discipline - and readin
 
 And solving this is genuinely hard. It's telling that [Tessl](https://tessl.io/) - which raised $125M on the promise of spec-driven development - has quietly steered away from selling SDD to developers and toward "skills are the new code." Oops?
 
-Luckily, the space is evolving and the pieces of the puzzle are starting to come together into solutions that might actually work.
+Luckily, the space is still young and actively experimenting, and a few approaches are starting to converge on something that actually works.
 
-The following two projects (disclaimer: one of them is mine) are at least heading in the right direction to address the real issues we have with vibe coding.
+The following two projects (disclaimer: one of them is mine) are, I think, the ones heading in the right direction.
 
 *FWIW, these are the only projects I actually know of that focus on the trust problem, but if there are others I'd love to hear about them.*
 
