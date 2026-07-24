@@ -62,7 +62,7 @@ In support of that, we want:
 
 1. **The agent to reliably do what we ask it to.** Ideally, deterministically - which might not be possible, but it's a good target.
 2. **To be able to audit and track what it does to our codebase.** Ideally, without having to necessarily read the code.
-3. **To keep friction to a minimum.** Vibe coding is winning because it's the path of least resistance, we need to accept that and try to improve the discipline.
+3. **To keep friction to a minimum.** Vibe coding is winning because it's the path of least resistance, we need to accept that and make the disciplined path the easy one.
 
 And none of the current solutions address the three points adequately. Most of them rely on, or flat out *are*, some variation of prompt engineering, which is *not* the same thing as intent distillation (#1.)
 
@@ -174,7 +174,7 @@ I've been working on this tool for the past six months, iterating on it to align
 
 Scryer bets the opposite way: trust in the agent is irreducible, so it should be as cheap as possible to spend. It's model-driven development for coding agents. You and your agent share a model of the system: a C4-style hierarchy where each node states what it's responsible for in short, language-independent claims, mapped to the source lines that implement them and the tests that prove them. The agent reads and writes the model over MCP; you browse it as wiki-style pages and diagrams instead of reading code.
 
-The model leads; the code follows. You plan a change, and the plan shows as a git-style diff over the entire model. Underneath sits a deterministic observability layer reporting what's built versus planned, which claims are anchored and test-backed, and where the code has drifted from the model since the last reconcile.
+The model leads; the code follows. You plan a change, and the plan shows as a git-style diff over the entire model. There's your blast radius. Underneath sits a deterministic observability layer reporting what's built versus planned, which claims are anchored and test-backed, and where the code has drifted from the model since the last reconcile.
 
 ## There's No Retreat
 
