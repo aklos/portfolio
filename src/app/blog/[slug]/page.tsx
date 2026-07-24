@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { formatDate, getAllPosts, getPostBySlug } from "@/lib/blog";
 
 export async function generateStaticParams() {
     const posts = getAllPosts();
@@ -20,6 +20,17 @@ export async function generateMetadata({
     return {
         title: `${post.title} — Alex Klos`,
         description: post.description,
+        openGraph: {
+            title: post.title,
+            description: post.description,
+            type: "article",
+            publishedTime: post.date,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description: post.description,
+        },
     };
 }
 
@@ -40,7 +51,7 @@ export default async function BlogPost({
             <div className="max-w-4xl mx-auto px-6 pt-10 pb-24">
                 <Link
                     href="/blog"
-                    className="group inline-flex items-center gap-1.5 text-sm text-muted hover:text-ink transition-colors"
+                    className="group inline-flex items-center gap-1.5 text-sm text-muted hover:text-blue transition-colors"
                 >
                     <FiArrowLeft className="text-base motion-safe:transition-transform duration-200 group-hover:-translate-x-0.5 text-orange" />
                     Blog
@@ -49,11 +60,11 @@ export default async function BlogPost({
                     {post.title}
                 </h1>
                 <p className="font-mono text-xs text-muted mb-12">
-                    {post.date}
+                    {formatDate(post.date)}
                 </p>
 
                 <article
-                    className="prose prose-headings:font-display prose-h2:text-xl max-w-none"
+                    className="prose prose-lg prose-headings:font-display max-w-none"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />
             </div>

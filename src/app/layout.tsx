@@ -26,6 +26,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://alexklos.ca"),
     title: "Alex Klos",
     description: "Software developer",
     icons: {
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
 const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})()`;
 
 const navLink =
-    "relative text-sm text-muted hover:text-ink transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-orange after:scale-x-0 after:origin-left hover:after:scale-x-100 motion-safe:after:transition-transform after:duration-200";
+    "relative text-sm text-muted hover:text-blue transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-orange after:scale-x-0 after:origin-left hover:after:scale-x-100 motion-safe:after:transition-transform after:duration-200";
 
 export default function RootLayout({
     children,
@@ -78,21 +79,21 @@ export default function RootLayout({
                         <a
                             href="https://github.com/aklos"
                             aria-label="GitHub"
-                            className="text-muted hover:text-ink transition-colors"
+                            className="text-muted hover:text-blue transition-colors"
                         >
                             <AiFillGithub className="text-lg" />
                         </a>
                         <a
                             href="https://www.linkedin.com/in/alexander-klos-460787120"
                             aria-label="LinkedIn"
-                            className="text-muted hover:text-ink transition-colors"
+                            className="text-muted hover:text-blue transition-colors"
                         >
                             <AiFillLinkedin className="text-lg" />
                         </a>
                         <a
                             href="https://x.com/alexmklos"
                             aria-label="X"
-                            className="text-muted hover:text-ink transition-colors"
+                            className="text-muted hover:text-blue transition-colors"
                         >
                             <RiTwitterXFill className="text-base" />
                         </a>
@@ -102,27 +103,23 @@ export default function RootLayout({
                 </header>
                 {children}
                 <footer className="max-w-4xl mx-auto px-6 pb-16">
-                    <Pattern
-                        variant="stripes"
-                        className="w-full h-1.5 text-line"
-                    />
-                    <div className="pt-8 flex items-center justify-between text-xs text-muted">
+                    <div className="pt-16 flex items-center justify-between text-xs text-muted">
                         <div className="flex gap-5 items-center">
                             <a
                                 href="https://github.com/aklos"
-                                className="hover:text-ink transition-colors"
+                                className="hover:text-blue transition-colors"
                             >
                                 <AiFillGithub className="text-lg" />
                             </a>
                             <a
                                 href="https://www.linkedin.com/in/alexander-klos-460787120"
-                                className="hover:text-ink transition-colors"
+                                className="hover:text-blue transition-colors"
                             >
                                 <AiFillLinkedin className="text-lg" />
                             </a>
                             <a
                                 href="https://x.com/alexmklos"
-                                className="hover:text-ink transition-colors"
+                                className="hover:text-blue transition-colors"
                             >
                                 <RiTwitterXFill className="text-base" />
                             </a>

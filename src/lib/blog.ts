@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
+import gfm from "remark-gfm";
 import html from "remark-html";
 
 export interface Post {
@@ -13,6 +14,15 @@ export interface Post {
 }
 
 const postsDirectory = path.join(process.cwd(), "src/content/blog");
+
+export function formatDate(date: string): string {
+    return new Date(date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        timeZone: "UTC",
+    });
+}
 
 export function getAllPosts(): Omit<Post, "content">[] {
     const filenames = fs.readdirSync(postsDirectory);
@@ -48,7 +58,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     const fileContents = fs.readFileSync(filePath, "utf8");
     const { data, content: markdownContent } = matter(fileContents);
 
-    const result = await remark().use(html).process(markdownContent);
+    const result = await remark().use(gfm).use(html).process(markdownContent);
 
     return {
         slug,

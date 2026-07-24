@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getAllPosts } from "@/lib/blog";
+import { formatDate, getAllPosts } from "@/lib/blog";
 import SectionHeading from "@/components/section-heading";
 
 export const metadata: Metadata = {
@@ -34,8 +34,8 @@ export default function BlogIndex() {
                                     {post.description}
                                 </span>
                             </div>
-                            <span className="font-mono text-xs text-muted tabular-nums shrink-0">
-                                {post.date}
+                            <span className="font-mono text-xs text-muted shrink-0">
+                                {formatDate(post.date)}
                             </span>
                         </Link>
                     ))}

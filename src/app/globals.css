@@ -82,6 +82,38 @@ body {
     --tw-prose-td-borders: var(--theme-line);
 }
 
+/* Links: blue, underline only on hover — matches inline links site-wide */
+.prose a {
+    text-decoration: none;
+}
+.prose a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Wide tables scroll in place instead of stretching the page on mobile */
+.prose table {
+    display: block;
+    overflow-x: auto;
+}
+
+/* Tighter list rhythm — default li margins read like paragraph gaps */
+.prose li {
+    margin-block: 0.3em;
+}
+.prose ul ul,
+.prose ul ol,
+.prose ol ul,
+.prose ol ol {
+    margin-block: 0.3em;
+}
+
+/* No auto-inserted curly quotes — blockquotes double as asides/callouts */
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+    content: none;
+}
+
 .github-calendar svg.react-activity-calendar__calendar {
     width: 100%;
     height: auto;
