@@ -83,7 +83,7 @@ export default async function BlogPost({
                 )}
 
                 <article
-                    className="prose prose-lg prose-headings:font-display max-w-none"
+                    className="prose prose-xl prose-headings:font-display max-w-none"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                 />
             </div>
