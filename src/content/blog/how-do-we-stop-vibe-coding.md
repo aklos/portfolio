@@ -1,7 +1,7 @@
 ---
 title: "How Do We Stop Vibe Coding?"
 date: "2026-07-24"
-description: "Coding agents won the workflow war, but nobody trusts their output. Why specs, skills, and TDD haven't fixed it — and what might."
+description: "Spoiler: we don't — we fix the trust problem instead."
 toc: true
 ---
 

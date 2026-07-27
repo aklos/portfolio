@@ -42,8 +42,12 @@ export default async function Image({
     const dmMono = fs.readFileSync(
         path.join(process.cwd(), "src/assets/dm-mono-regular.ttf"),
     );
+    const mulish = fs.readFileSync(
+        path.join(process.cwd(), "src/assets/mulish-regular.ttf"),
+    );
 
     const title = post?.title ?? "Alex Klos";
+    const description = post?.description ?? "";
     const date = post ? formatDate(post.date) : "";
 
     return new ImageResponse(
@@ -79,17 +83,33 @@ export default async function Image({
                     </svg>
                 </div>
 
-                <div
-                    style={{
-                        fontFamily: "League Spartan",
-                        fontSize: title.length > 45 ? 60 : 76,
-                        color: ink,
-                        lineHeight: 1.05,
-                        letterSpacing: "-0.02em",
-                        maxWidth: 1000,
-                    }}
-                >
-                    {title}
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div
+                        style={{
+                            fontFamily: "League Spartan",
+                            fontSize: title.length > 45 ? 60 : 76,
+                            color: ink,
+                            lineHeight: 1.05,
+                            letterSpacing: "-0.02em",
+                            maxWidth: 1000,
+                        }}
+                    >
+                        {title}
+                    </div>
+                    {description && (
+                        <div
+                            style={{
+                                fontFamily: "Mulish",
+                                fontSize: 32,
+                                color: muted,
+                                lineHeight: 1.4,
+                                maxWidth: 960,
+                                marginTop: 24,
+                            }}
+                        >
+                            {description}
+                        </div>
+                    )}
                 </div>
 
                 <div
@@ -132,6 +152,12 @@ export default async function Image({
                 {
                     name: "DM Mono",
                     data: dmMono,
+                    weight: 400,
+                    style: "normal",
+                },
+                {
+                    name: "Mulish",
+                    data: mulish,
                     weight: 400,
                     style: "normal",
                 },
