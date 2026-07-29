@@ -1,0 +1,56 @@
+name: "Syndicate"
+
+# Deploy first: the Substack backlink and the LinkedIn link card both point at
+# the live post, and a missing cover falls back to the deployed OG image.
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "Post slug (filename in src/content/blog, without .md)"
+        required: true
+        type: string
+      targets:
+        description: "Where to syndicate"
+        required: true
+        type: choice
+        default: both
+        options: [both, substack, linkedin]
+      dry_run:
+        description: "Dry run — show what would be sent, contact nothing"
+        type: boolean
+        default: true
+
+jobs:
+  syndicate:
+    name: "Syndicate post"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - run: pip install -r scripts/requirements.txt
+
+      # Substack creates a draft; publish from their editor after reviewing.
+      - name: "Substack"
+        if: inputs.targets == 'both' || inputs.targets == 'substack'
+        run: python scripts/syndicate_substack.py "$SLUG" $DRY_RUN
+        env:
+          SLUG: ${{ inputs.slug }}
+          DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
+          PUBLICATION_URL: ${{ secrets.PUBLICATION_URL }}
+          COOKIES_STRING: ${{ secrets.COOKIES_STRING }}
+
+      # LinkedIn has no draft state for feed posts — this publishes immediately.
+      - name: "LinkedIn"
+        if: inputs.targets == 'both' || inputs.targets == 'linkedin'
+        run: python scripts/syndicate_linkedin.py "$SLUG" $DRY_RUN
+        env:
+          SLUG: ${{ inputs.slug }}
+          DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
