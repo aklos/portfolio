@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
-import { formatDate, getAllPosts, getPostBySlug } from "@/lib/blog";
+import { coverUrl, formatDate, getAllPosts, getPostBySlug } from "@/lib/blog";
 import Toc, { TocList } from "@/components/toc";
 
 export async function generateStaticParams() {
@@ -67,9 +67,45 @@ export default async function BlogPost({
                 <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight mt-6 mb-2">
                     {post.title}
                 </h1>
-                <p className="font-mono text-xs text-muted mb-12">
+                <p className="font-mono text-xs text-muted mb-8">
                     {formatDate(post.date)}
                 </p>
+
+                {post.cover && (
+                    <figure className="mb-12">
+                        {/* dimensions are fixed by the cover pipeline, so they
+                            reserve space and avoid layout shift */}
+                        <img
+                            src={coverUrl(post.cover)}
+                            alt={post.coverAlt ?? ""}
+                            width={1456}
+                            height={1048}
+                            className="w-full h-auto rounded-lg border border-line"
+                        />
+                        {post.coverCredit && (
+                            <figcaption className="font-mono text-xs text-muted mt-3">
+                                Photo by{" "}
+                                <a
+                                    href={post.coverCreditUrl ?? undefined}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="hover:text-blue transition-colors"
+                                >
+                                    {post.coverCredit}
+                                </a>{" "}
+                                on{" "}
+                                <a
+                                    href="https://unsplash.com/?utm_source=alexklos&utm_medium=referral"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="hover:text-blue transition-colors"
+                                >
+                                    Unsplash
+                                </a>
+                            </figcaption>
+                        )}
+                    </figure>
+                )}
 
                 {post.toc && post.toc.length > 0 && (
                     <details className="2xl:hidden -mt-6 mb-12">

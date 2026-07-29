@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { ImageResponse } from "next/og";
-import { formatDate, getAllPosts, getPostBySlug } from "@/lib/blog";
+import { coverFilePath, formatDate, getAllPosts, getPostBySlug } from "@/lib/blog";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -35,6 +35,32 @@ export default async function Image({
 }) {
     const { slug } = await params;
     const post = await getPostBySlug(slug);
+
+    /* A chosen cover always wins: the generated card below is the fallback for
+       posts that don't have one. Covers are authored at Substack's 1456x1048
+       and cropped to the 1.91:1 social slot here. */
+    if (post?.cover) {
+        const file = coverFilePath(post.cover);
+        if (fs.existsSync(file)) {
+            const ext = path.extname(file).toLowerCase();
+            const mime = ext === ".png" ? "image/png" : "image/jpeg";
+            const data = fs.readFileSync(file).toString("base64");
+
+            return new ImageResponse(
+                (
+                    <div style={{ display: "flex", width: "100%", height: "100%" }}>
+                        <img
+                            src={`data:${mime};base64,${data}`}
+                            width={size.width}
+                            height={size.height}
+                            style={{ objectFit: "cover" }}
+                        />
+                    </div>
+                ),
+                size,
+            );
+        }
+    }
 
     const leagueSpartan = fs.readFileSync(
         path.join(process.cwd(), "src/assets/league-spartan-bold.ttf"),
