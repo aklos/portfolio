@@ -1,0 +1,5 @@
+# Local-only extras for the auth and cover tooling. CI doesn't need these —
+# the workflows read credentials from repository secrets and never pick covers.
+-r requirements.txt
+browser-cookie3==0.20.1
+pillow==11.3.0

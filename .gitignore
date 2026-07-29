@@ -25,7 +25,16 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
+
+# syndication secrets — substack session cookies, linkedin tokens
+cookies.json
+
+# python (scripts/)
+__pycache__/
+*.pyc
+.venv/
 
 # vercel
 .vercel
