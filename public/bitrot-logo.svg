@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <rect width="300" height="300" fill="#ffffff"/>
+
+  <!-- 4x4 grid, sitting high so the loosed bits have somewhere to fall -->
+  <g fill="#16324f">
+    <rect x="42" y="30" width="48" height="48"/>
+    <rect x="98" y="30" width="48" height="48"/>
+    <rect x="154" y="30" width="48" height="48"/>
+    <rect x="210" y="30" width="48" height="48"/>
+
+    <rect x="42" y="86" width="48" height="48"/>
+    <rect x="98" y="86" width="48" height="48"/>
+    <rect x="154" y="86" width="48" height="48"/>
+    <rect x="210" y="86" width="48" height="48"/>
+
+    <!-- decay runs down and to the right -->
+    <rect x="42" y="142" width="48" height="48"/>
+    <rect x="98" y="142" width="48" height="48"/>
+    <rect x="154" y="142" width="48" height="48" opacity="0.8"/>
+
+    <rect x="42" y="198" width="48" height="48" opacity="0.7"/>
+    <rect x="98" y="198" width="48" height="48" opacity="0.45"/>
+  </g>
+
+  <!-- Bits that have come loose: square to the grid, smaller and fainter
+       the further they've fallen -->
+  <rect x="154" y="232" width="40" height="40" fill="#f07f23" opacity="0.85"/>
+  <rect x="214" y="194" width="30" height="30" fill="#16324f" opacity="0.42"/>
+  <rect x="236" y="244" width="22" height="22" fill="#16324f" opacity="0.28"/>
+  <rect x="102" y="252" width="24" height="24" fill="#f07f23" opacity="0.45"/>
+</svg>
