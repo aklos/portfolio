@@ -2,6 +2,9 @@
 title: "The Crypto Community Is a Mess"
 date: "2022-02-19"
 description: "What could be a step forward for society is devolving into an off-putting war with clowns on both sides."
+section: tech
+channels: [site]
+linkedin:
 ---
 
 Crypto is yet another polarizing topic these days. Some people are trying to figure out what the hell is going on with it, while most everyone else seems to have already made up their mind, and they usually don't like to have their decisions questioned.

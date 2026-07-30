@@ -2,6 +2,9 @@
 title: "Why Not Hire Part-Time Developers?"
 date: "2022-02-27"
 description: "Very few companies even consider this option, and that's a mistake."
+section: tech
+channels: [site]
+linkedin:
 ---
 
 ## Having a hard time finding good talent?

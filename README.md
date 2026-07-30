@@ -36,6 +36,37 @@ posts are set up.
 `channels` controls where a post appears. Fiction is typically
 `[substack]`, which keeps it off the site entirely while still syndicating.
 
+### Drafts
+
+Articles are written in the Obsidian vault at `~/obsidian`, one folder note
+per piece — `Articles/<Name>/<Name>.md`. The vault is the source of truth, so
+edits go there and get carried over:
+
+```bash
+.venv/bin/python scripts/sync_vault.py            # every tracked draft
+.venv/bin/python scripts/sync_vault.py <slug>
+.venv/bin/python scripts/sync_vault.py --dry-run
+```
+
+A draft only syncs once `src/content/blog/<slug>.md` exists — creating that
+file, named for the slugified title, is how a finished article opts in. Drafts
+without one are reported as skipped, with the filename they're looking for.
+
+The sync is one-way and the draft owns the whole file — prose and frontmatter
+both — so nothing edited directly under `src/content/blog/` survives. After a
+sync the two copies are identical. Frontmatter the draft is missing gets
+scaffolded into it, seeded from the repo copy where that already has a value,
+so an existing post migrates into the vault on its first sync instead of
+losing fields.
+
+A post with no draft in the vault is edited here instead, and the sync leaves
+it alone — though every post has a draft now, so that's just a fallback.
+
+Obsidian-isms that won't render — `==unresolved markers==`, `[[wikilinks]]` —
+are warned about, not blocked.
+
+`--vault` or `$OBSIDIAN_VAULT` points somewhere other than `~/obsidian`.
+
 ### Covers
 
 ```bash
@@ -45,6 +76,8 @@ posts are set up.
 Opens a local page: search Unsplash or drop in your own image, drag an
 aspect-locked frame to choose the crop, and it writes
 `public/covers/<slug>.jpg` at 1456×1048 plus the frontmatter fields above.
+Those go into the Obsidian draft and are synced through, so the cover survives
+the next sync rather than being overwritten by it.
 Needs `UNSPLASH_ACCESS_KEY` in `.env` for search; the drop-your-own path works
 without it.
 

@@ -5,6 +5,10 @@ Whichever you choose is cropped to Substack's 1456x1048, written to
 public/covers/<slug>.jpg, and recorded in the post's frontmatter — including
 the photographer credit, which Unsplash's API terms require you to display.
 
+The frontmatter is written into the Obsidian draft, since that's the source of
+truth, and then synced through to src/content/blog. A post with no draft is
+edited in the repo directly.
+
 Usage:
     python scripts/cover_picker.py <slug> [--query "search terms"]
 
@@ -28,6 +32,7 @@ import requests
 from dotenv import load_dotenv
 
 import post as postlib
+import sync_vault
 from post import COVERS_DIR, REPO_ROOT, fail
 
 COVER_WIDTH = 1456
@@ -306,7 +311,12 @@ def save(slug: str, data: bytes, meta: dict[str, str], box: dict | None = None) 
     COVERS_DIR.mkdir(parents=True, exist_ok=True)
     filename = f"{slug}.jpg"
     (COVERS_DIR / filename).write_bytes(crop(data, box))
-    postlib.set_frontmatter(slug, {"cover": filename, **meta})
+
+    # written into the draft; sync it through so the site has the cover too
+    written = postlib.set_frontmatter(slug, {"cover": filename, **meta})
+    if written != postlib.POSTS_DIR / f"{slug}.md":
+        sync_vault.sync_note(written)
+
     return filename
 
 
