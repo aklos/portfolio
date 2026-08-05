@@ -44,8 +44,22 @@ def backlink(post: postlib.Post) -> str:
     return "\n\n".join(lines)
 
 
+def fetch_sections(api) -> list[dict]:
+    """Not `api.get_sections()`: that reads /subscriptions — the publications you
+    subscribe to — and hunts for your own in the list. Yours isn't in there, and
+    Substack has since made the endpoint 400 without a `tvOnly` param. This is
+    the endpoint that answers the question, and it returns [] until sections
+    exist."""
+    response = api._session.get(f"{api.publication_url}/publication/sections")
+    if not response.ok:
+        print(f"warning: could not list Substack sections ({response.status_code})")
+        return []
+    sections = response.json()
+    return sections if isinstance(sections, list) else []
+
+
 def resolve_section_id(api, section: str) -> int | None:
-    sections = api.get_sections() or []
+    sections = fetch_sections(api)
     for candidate in sections:
         if str(candidate.get("name", "")).strip().lower() == section.strip().lower():
             return candidate.get("id")
@@ -93,13 +107,16 @@ def main() -> None:
 
     from substack import Api
 
+    # `or None` matters: the Api picks its auth branch with `is not None`, so an
+    # unused-but-present `COOKIES_PATH=` in .env sends it down the file branch
+    # and it opens "" instead of reading COOKIES_STRING.
     api = Api(
-        cookies_string=os.getenv("COOKIES_STRING"),
-        cookies_path=os.getenv("COOKIES_PATH"),
+        cookies_string=os.getenv("COOKIES_STRING") or None,
+        cookies_path=os.getenv("COOKIES_PATH") or None,
         publication_url=publication_url,
     )
 
-    draft = api.create_draft_from_markdown(
+    result = api.create_draft_from_markdown(
         title=post.title,
         subtitle=post.description,
         markdown=markdown,
@@ -108,6 +125,9 @@ def main() -> None:
         search_engine_description=post.description,
     )
 
+    # the draft comes back wrapped alongside tags/prepublish/publish results;
+    # the `or result` keeps this working if that wrapper ever goes away
+    draft = result.get("draft") or result
     draft_id = draft.get("id")
     if not draft_id:
         fail(f"Substack did not return a draft id: {draft}")

@@ -1,11 +1,23 @@
 ---
-title: "How Do We Stop Vibe Coding?"
-date: "2026-07-24"
+title: How Do We Stop Vibe Coding?
+date: 2026-07-24
 description: "Spoiler: we don't — we fix the trust problem instead."
 toc: true
 section: tech
-channels: [site]
-linkedin:
+channels:
+  - site
+  - linkedin
+  - substack
+linkedin: |
+  Every conversation I have about AI coding ends in the same place.
+
+  Everyone agrees vibe coding is a problem. Then the fix turns out to be markdown specs, or Spec Kit, or Kiro, or skills, which are all just prompt engineering with some ritual layered on top. Nothing actually checks that the agent did what you asked it to.
+
+  That's what finally got me to post here for the first time. I wrote about why none of the current solutions hold up, and the two projects I think are pointed at the real problem: trust. (One of them is mine, so, disclaimer.)
+cover: how-do-we-stop-vibe-coding.jpg
+coverAlt: Digital art with text "claude code" and "vibe coding"
+coverCredit: Bernd 📷 Dittrich
+coverCreditUrl: https://unsplash.com/@hdbernd?utm_source=alexklos&utm_medium=referral
 ---
 
 When Claude Code blew up in popularity near the end of December 2025, a large portion of software developers quickly shifted to using coding agents as part of their main development workflows.
