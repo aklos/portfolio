@@ -20,9 +20,10 @@ export default function GithubContributions() {
 
     if (!mounted) return null;
 
+    /* mist → signal, matching the theme tokens in globals.css */
     const theme = {
-        light: ["#eef3fb", "#b3cdf1", "#7fabe8", "#4a86de", "#1d5fce"],
-        dark: ["#16273f", "#24406a", "#33589a", "#4a79cd", "#6fa3f0"],
+        light: ["#ececea", "#c4dcf3", "#8fbfe8", "#4f94d6", "#1568b8"],
+        dark: ["#1a1c20", "#1d3350", "#245081", "#3579bd", "#58b0f0"],
     };
 
     return (

@@ -9,7 +9,7 @@ export default function SectionHeading({
         <div className="mb-10">
             <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight">
                 {title}
-                <span className="text-orange">.</span>
+                <span className="text-signal">.</span>
             </h2>
             {sub && <p className="text-sm text-muted mt-1">{sub}</p>}
         </div>

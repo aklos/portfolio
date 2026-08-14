@@ -1,5 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#2d6bd8"/>
-  <text x="16" y="22" font-family="Avenir, 'Century Gothic', Futura, sans-serif" font-size="17" font-weight="800" fill="#ffffff" text-anchor="middle">AK</text>
-  <path d="M6 27 Q7.25 24.8 8.5 27 T11 27 T13.5 27 T16 27 T18.5 27 T21 27 T23.5 27 T26 27" fill="none" stroke="#f07f23" stroke-width="2" stroke-linecap="round"/>
+  <rect width="32" height="32" rx="2" fill="#16181c"/>
+  <text x="16" y="21" font-family="'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="800" letter-spacing="-0.5" fill="#eaeae7" text-anchor="middle">AK</text>
+  <g fill="#dd8f4e">
+    <rect x="6" y="24.5" width="3" height="3"/>
+    <rect x="11" y="24.5" width="3" height="3" opacity="0.75"/>
+    <rect x="16" y="24.5" width="3" height="3" opacity="0.5"/>
+    <rect x="21" y="24.5" width="3" height="3" opacity="0.3"/>
+    <rect x="26" y="26" width="1.5" height="1.5" opacity="0.2"/>
+  </g>
 </svg>

@@ -12,21 +12,15 @@ export function generateStaticParams() {
 }
 
 /* light theme colors from globals.css — cards render the same for everyone */
-const paper = "#ffffff";
-const ink = "#16324f";
-const orange = "#f07f23";
-const blue = "#2d6bd8";
-const muted = "#5d7290";
+const paper = "#f6f6f4";
+const ink = "#16181c";
+const emulsion = "#a8551f";
+const signal = "#1568b8";
+const muted = "#666b72";
 
-function wavePath(width: number, height: number) {
-    const mid = height / 2;
-    const half = 12;
-    let d = `M0 ${mid} Q ${half / 2} 0, ${half} ${mid}`;
-    for (let x = half * 2; x <= width + half; x += half) {
-        d += ` T ${x} ${mid}`;
-    }
-    return d;
-}
+/* the decay bit-stream from the site header: blocks thinning out into
+   dropouts (0 = a gap in the stream) */
+const decayBits = [1, 1, 0.85, 0, 0.7, 0.55, 0, 0.4, 0.25, 0, 0.12];
 
 export default async function Image({
     params,
@@ -62,14 +56,14 @@ export default async function Image({
         }
     }
 
-    const leagueSpartan = fs.readFileSync(
-        path.join(process.cwd(), "src/assets/league-spartan-bold.ttf"),
+    const bricolage = fs.readFileSync(
+        path.join(process.cwd(), "src/assets/bricolage-grotesque-bold.ttf"),
     );
-    const dmMono = fs.readFileSync(
-        path.join(process.cwd(), "src/assets/dm-mono-regular.ttf"),
+    const plexMono = fs.readFileSync(
+        path.join(process.cwd(), "src/assets/ibm-plex-mono-regular.ttf"),
     );
-    const mulish = fs.readFileSync(
-        path.join(process.cwd(), "src/assets/mulish-regular.ttf"),
+    const plexSans = fs.readFileSync(
+        path.join(process.cwd(), "src/assets/ibm-plex-sans-regular.ttf"),
     );
 
     const title = post?.title ?? "Alex Klos";
@@ -92,27 +86,32 @@ export default async function Image({
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <div
                         style={{
-                            fontFamily: "League Spartan",
+                            fontFamily: "Bricolage Grotesque",
                             fontSize: 38,
                             color: ink,
                         }}
                     >
                         Alex Klos
                     </div>
-                    <svg width="136" height="12" viewBox="0 0 136 12">
-                        <path
-                            d={wavePath(136, 12)}
-                            stroke={orange}
-                            strokeWidth="2.5"
-                            fill="none"
-                        />
-                    </svg>
+                    <div style={{ display: "flex", gap: 4, marginTop: 6 }}>
+                        {decayBits.map((bit, i) => (
+                            <div
+                                key={i}
+                                style={{
+                                    width: 8,
+                                    height: 8,
+                                    backgroundColor: emulsion,
+                                    opacity: bit,
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <div
                         style={{
-                            fontFamily: "League Spartan",
+                            fontFamily: "Bricolage Grotesque",
                             fontSize: title.length > 45 ? 60 : 76,
                             color: ink,
                             lineHeight: 1.05,
@@ -125,7 +124,7 @@ export default async function Image({
                     {description && (
                         <div
                             style={{
-                                fontFamily: "Mulish",
+                                fontFamily: "IBM Plex Sans",
                                 fontSize: 32,
                                 color: muted,
                                 lineHeight: 1.4,
@@ -147,7 +146,7 @@ export default async function Image({
                 >
                     <div
                         style={{
-                            fontFamily: "DM Mono",
+                            fontFamily: "IBM Plex Mono",
                             fontSize: 26,
                             color: muted,
                         }}
@@ -156,9 +155,9 @@ export default async function Image({
                     </div>
                     <div
                         style={{
-                            fontFamily: "DM Mono",
+                            fontFamily: "IBM Plex Mono",
                             fontSize: 26,
-                            color: blue,
+                            color: signal,
                         }}
                     >
                         Blog
@@ -170,20 +169,20 @@ export default async function Image({
             ...size,
             fonts: [
                 {
-                    name: "League Spartan",
-                    data: leagueSpartan,
+                    name: "Bricolage Grotesque",
+                    data: bricolage,
                     weight: 700,
                     style: "normal",
                 },
                 {
-                    name: "DM Mono",
-                    data: dmMono,
+                    name: "IBM Plex Mono",
+                    data: plexMono,
                     weight: 400,
                     style: "normal",
                 },
                 {
-                    name: "Mulish",
-                    data: mulish,
+                    name: "IBM Plex Sans",
+                    data: plexSans,
                     weight: 400,
                     style: "normal",
                 },

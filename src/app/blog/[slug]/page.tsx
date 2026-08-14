@@ -59,9 +59,9 @@ export default async function BlogPost({
                 )}
                 <Link
                     href="/blog"
-                    className="group inline-flex items-center gap-1.5 text-sm text-muted hover:text-blue transition-colors"
+                    className="group inline-flex items-center gap-1.5 text-sm text-muted hover:text-signal transition-colors"
                 >
-                    <FiArrowLeft className="text-base motion-safe:transition-transform duration-200 group-hover:-translate-x-0.5 text-orange" />
+                    <FiArrowLeft className="text-base motion-safe:transition-transform duration-200 group-hover:-translate-x-0.5 text-signal" />
                     Blog
                 </Link>
                 <h1 className="font-display text-3xl md:text-4xl font-bold tracking-tight mt-6 mb-2">
@@ -80,7 +80,7 @@ export default async function BlogPost({
                             alt={post.coverAlt ?? ""}
                             width={1456}
                             height={1048}
-                            className="w-full h-auto rounded-lg border border-line"
+                            className="w-full h-auto rounded-xs border border-line"
                         />
                         {post.coverCredit && (
                             <figcaption className="font-mono text-xs text-muted mt-3">
@@ -89,7 +89,7 @@ export default async function BlogPost({
                                     href={post.coverCreditUrl ?? undefined}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="hover:text-blue transition-colors"
+                                    className="hover:text-signal transition-colors"
                                 >
                                     {post.coverCredit}
                                 </a>{" "}
@@ -98,7 +98,7 @@ export default async function BlogPost({
                                     href="https://unsplash.com/?utm_source=alexklos&utm_medium=referral"
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="hover:text-blue transition-colors"
+                                    className="hover:text-signal transition-colors"
                                 >
                                     Unsplash
                                 </a>
@@ -109,7 +109,7 @@ export default async function BlogPost({
 
                 {post.toc && post.toc.length > 0 && (
                     <details className="2xl:hidden -mt-6 mb-12">
-                        <summary className="cursor-pointer font-mono text-xs uppercase tracking-wider text-muted hover:text-blue transition-colors">
+                        <summary className="cursor-pointer font-mono text-xs uppercase tracking-wider text-muted hover:text-signal transition-colors">
                             On this page
                         </summary>
                         <div className="mt-4 text-sm">

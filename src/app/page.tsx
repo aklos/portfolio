@@ -109,7 +109,7 @@ export default function Home() {
                             and games fill the rest. Currently building{" "}
                             <a
                                 href="https://github.com/aklos/scryer"
-                                className="text-blue hover:underline underline-offset-4"
+                                className="text-signal hover:underline underline-offset-4"
                             >
                                 Scryer
                             </a>
@@ -119,8 +119,8 @@ export default function Home() {
                     </div>
                     <div className="relative shrink-0 self-start md:self-auto group">
                         <Pattern
-                            variant="dots"
-                            className="absolute -inset-1 translate-x-4 translate-y-4 rounded-full text-orange/80 motion-safe:transition-transform duration-300 group-hover:translate-x-5 group-hover:translate-y-5"
+                            variant="dither"
+                            className="absolute -inset-1 translate-x-4 translate-y-4 rounded-full text-signal/80 motion-safe:transition-transform duration-300 group-hover:translate-x-5 group-hover:translate-y-5"
                         />
                         <img
                             src="/face.png"
@@ -133,21 +133,21 @@ export default function Home() {
                 {/* Halftone diamond in the gap between text and photo;
                     rotates when the intro block above is hovered */}
                 <Pattern
-                    variant="dots"
-                    className="pointer-events-none absolute -z-10 top-4 right-16 md:right-32 rotate-45 w-72 h-72 md:w-96 md:h-96 text-blue/10 motion-safe:transition-transform duration-1000 ease-out peer-hover/hero:rotate-[57deg]"
+                    variant="dither"
+                    className="pointer-events-none absolute -z-10 top-4 right-16 md:right-32 rotate-45 w-72 h-72 md:w-96 md:h-96 text-emulsion/10 motion-safe:transition-transform duration-1000 ease-out peer-hover/hero:rotate-[57deg]"
                 />
 
                 {/* GitHub activity, layered into the hero */}
                 <div className="relative mt-14 group">
                     <Pattern
-                        variant="stripes"
-                        className="absolute inset-0 translate-x-2 translate-y-2 rounded-lg text-blue/25 motion-safe:transition-transform duration-300 group-hover:translate-x-3.5 group-hover:translate-y-3.5"
+                        variant="scanlines"
+                        className="absolute inset-0 translate-x-2 translate-y-2 rounded-xs text-emulsion/25 motion-safe:transition-transform duration-300 group-hover:translate-x-3.5 group-hover:translate-y-3.5"
                     />
                     <Pattern
-                        variant="dots"
-                        className="absolute -top-3 -right-3 w-28 h-16 text-orange/70 motion-safe:transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                        variant="dither"
+                        className="absolute -top-3 -right-3 w-28 h-16 text-signal/70 motion-safe:transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
                     />
-                    <div className="relative bg-paper border border-line rounded-lg p-5 md:p-6 min-h-28">
+                    <div className="relative bg-paper border border-line rounded-xs p-5 md:p-6 min-h-28">
                         <GithubContributions />
                     </div>
                 </div>
@@ -168,12 +168,12 @@ export default function Home() {
                                 className="relative group"
                             >
                                 <Pattern
-                                    variant="stripes"
-                                    className={`absolute inset-0 rounded-lg opacity-0 motion-safe:transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-1.5 group-hover:translate-y-1.5 ${
-                                        i % 2 ? "text-blue/40" : "text-orange/50"
+                                    variant="scanlines"
+                                    className={`absolute inset-0 rounded-xs opacity-0 motion-safe:transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-1.5 group-hover:translate-y-1.5 ${
+                                        i % 2 ? "text-emulsion/40" : "text-signal/50"
                                     }`}
                                 />
-                                <div className="relative h-full bg-paper border border-line rounded-lg p-5 motion-safe:transition-transform duration-200 group-hover:-translate-y-0.5">
+                                <div className="relative h-full bg-paper border border-line rounded-xs p-5 motion-safe:transition-transform duration-200 group-hover:-translate-y-0.5">
                                     <div className="flex items-baseline justify-between gap-3 mb-2 font-mono text-xs text-muted">
                                         <span className="uppercase tracking-wider">
                                             {project.type}
@@ -182,7 +182,7 @@ export default function Home() {
                                             {project.year}
                                         </span>
                                     </div>
-                                    <h3 className="font-display text-lg font-bold mb-1 group-hover:text-blue transition-colors">
+                                    <h3 className="font-display text-lg font-bold mb-1 group-hover:text-signal transition-colors">
                                         {project.name}
                                     </h3>
                                     <p className="text-sm text-muted leading-relaxed">
@@ -198,45 +198,35 @@ export default function Home() {
                 <div className="mb-24">
                     <SectionHeading title="Experience" sub="Where I've worked" />
 
-                    <div className="ml-1.5">
-                        {experience.map((job, i) => (
+                    <div className="border-t border-line">
+                        {experience.map((job) => (
                             <div
                                 key={job.company}
-                                className="relative pl-8 pb-8 last:pb-0"
+                                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-5 py-5 border-b border-line"
                             >
-                                <span
-                                    aria-hidden="true"
-                                    className={`absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full ${
-                                        job.period.endsWith("Present")
-                                            ? "bg-orange"
-                                            : "bg-blue"
-                                    }`}
-                                />
-                                {i < experience.length - 1 && (
+                                <div className="flex items-baseline gap-3">
+                                    <span className="font-display font-semibold">
+                                        {job.company}
+                                    </span>
+                                    {job.type && (
+                                        <span className="text-xs text-muted">
+                                            {job.type}
+                                        </span>
+                                    )}
+                                </div>
+                                <div className="flex items-baseline gap-4">
+                                    <span className="text-sm text-muted">
+                                        {job.role}
+                                    </span>
                                     <span
-                                        aria-hidden="true"
-                                        className="absolute -left-px top-5 bottom-0.5 border-l-2 border-dotted border-line"
-                                    />
-                                )}
-                                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                                    <div className="flex items-baseline gap-3">
-                                        <span className="font-display font-semibold">
-                                            {job.company}
-                                        </span>
-                                        {job.type && (
-                                            <span className="text-xs text-muted">
-                                                {job.type}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <div className="flex items-baseline gap-4">
-                                        <span className="text-sm text-muted">
-                                            {job.role}
-                                        </span>
-                                        <span className="font-mono text-xs text-muted tabular-nums">
-                                            {job.period}
-                                        </span>
-                                    </div>
+                                        className={`font-mono text-xs tabular-nums ${
+                                            job.period.endsWith("Present")
+                                                ? "text-emulsion"
+                                                : "text-muted"
+                                        }`}
+                                    >
+                                        {job.period}
+                                    </span>
                                 </div>
                             </div>
                         ))}

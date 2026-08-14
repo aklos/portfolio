@@ -24,10 +24,10 @@ export default function BlogIndex() {
                         <Link
                             key={post.slug}
                             href={`/blog/${post.slug}`}
-                            className="group flex items-baseline justify-between gap-4 py-5 border-b border-line"
+                            className="group glitch-trigger flex items-baseline justify-between gap-4 py-5 border-b border-line"
                         >
                             <div className="min-w-0">
-                                <span className="font-display text-lg font-bold group-hover:text-blue transition-colors block truncate">
+                                <span className="glitch-target font-display text-lg font-bold block truncate">
                                     {post.title}
                                 </span>
                                 <span className="text-sm text-muted truncate block mt-0.5">

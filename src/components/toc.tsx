@@ -21,8 +21,8 @@ export function TocList({
                         href={`#${entry.id}`}
                         className={`block leading-snug transition-colors ${
                             active === entry.id
-                                ? "text-blue"
-                                : "text-muted hover:text-blue"
+                                ? "text-signal"
+                                : "text-muted hover:text-signal"
                         }`}
                     >
                         {entry.text}

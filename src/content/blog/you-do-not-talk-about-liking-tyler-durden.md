@@ -8,6 +8,8 @@ channels:
   - site
   - substack
 linkedin:
+cover: "you-do-not-talk-about-liking-tyler-durden.jpg"
+coverAlt: "You do not talk about liking Tyler Durden"
 ---
 
 The 30th anniversary of Fight Club is coming up in a few days, and for the last 15 years we've been told that "if you like Tyler Durden, you don't get it." I always felt it was odd to give people an anti-hero then reprimand them for sympathizing with him.
