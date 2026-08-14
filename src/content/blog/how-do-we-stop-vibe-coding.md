@@ -9,11 +9,13 @@ channels:
   - linkedin
   - substack
 linkedin: |
-  Every conversation I have about AI coding ends in the same place.
+  Every conversation I have about AI coding ends in the same place, which is getting pretty frustrating. I want to move the conversation forward here.
 
-  Everyone agrees vibe coding is a problem. Then the fix turns out to be markdown specs, or Spec Kit, or Kiro, or skills, which are all just prompt engineering with some ritual layered on top. Nothing actually checks that the agent did what you asked it to.
+  Everyone agrees vibe coding is a problem. I don't care if you're super rigorous about it, it's still vibe coding to me! It's not a dirty word! But the rigor can't just be markdown specs, or Spec Kit, or Kiro, or skills, which are all prompt/context engineering with some ritual layered on top. Nothing actually checks that the agent did what you asked it to. You're still essentially trusting the AI to do everything right.
 
-  That's what finally got me to post here for the first time. I wrote about why none of the current solutions hold up, and the two projects I think are pointed at the real problem: trust. (One of them is mine, so, disclaimer.)
+  That's what finally got me to post here for the first time. I wrote about why none of the current solutions hold up, and the two projects I think are pointed at the real problem: TRUST.
+
+  (Disclosure: one of the projects is my own - so please read accordingly)
 cover: how-do-we-stop-vibe-coding.jpg
 coverAlt: Digital art with text "claude code" and "vibe coding"
 coverCredit: Bernd 📷 Dittrich
