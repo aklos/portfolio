@@ -36,7 +36,7 @@ export default function PublicationHero({
                     {PUBLICATION.tagline}
                 </p>
                 <p className="text-sm md:text-base opacity-80 mt-2 mb-5">
-                    Free by email.
+                    Free, via Substack.
                 </p>
                 <SubscribeButton />
             </div>

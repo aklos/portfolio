@@ -249,12 +249,18 @@ body {
     margin-block: 0.3em;
 }
 
-/* Blockquotes double as asides/callouts: a filled block, and no
-   auto-inserted curly quotes */
+/* Blockquotes: upright, a shade quieter than the body, set off by a thin
+   rule rather than a box; no auto-inserted curly quotes */
 .prose blockquote {
-    background-color: var(--theme-mist);
-    border-left-width: 0;
-    padding: 0.25em 1.25em;
+    font-style: normal;
+    font-weight: inherit;
+    color: var(--theme-muted);
+    border-left: 2px solid color-mix(in oklab, var(--theme-ink) 30%, transparent);
+    padding: 0 0 0 1.25em;
+    margin-left: 0;
+}
+.prose blockquote strong {
+    color: var(--theme-ink);
 }
 .prose blockquote p:first-of-type::before,
 .prose blockquote p:last-of-type::after {

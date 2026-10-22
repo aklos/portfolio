@@ -36,7 +36,7 @@ export default function BlogIndex() {
                             {PUBLICATION.name}
                         </p>
                         <p className="text-sm text-muted mt-0.5">
-                            {PUBLICATION.tagline} Free by email.
+                            {PUBLICATION.tagline} Free, via Substack.
                         </p>
                     </div>
                 </Link>
