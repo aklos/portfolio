@@ -15,9 +15,11 @@ import type p5 from "p5";
  *   halftone   a dot screen dissolving from one corner; the front creeps
  *   lattice    a hex grid with a route lit through it; the route traces
  *   waves      stacked wave profiles, heavier toward the bottom; they roll
+ *   orbits     nested tilted orbits round a point, one craft on each; they
+ *              move along their orbits
  */
 
-export type Pattern = "concentric" | "halftone" | "lattice" | "waves";
+export type Pattern = "concentric" | "halftone" | "lattice" | "waves" | "orbits";
 
 /* each sketch draws one frame for time t (seconds of hover) */
 type Sketch = (p: p5, color: string) => (t: number) => void;
@@ -149,7 +151,47 @@ const waves: Sketch = (p, color) => (t) => {
     }
 };
 
-const sketches: Record<Pattern, Sketch> = { concentric, halftone, lattice, waves };
+const orbits: Sketch = (p, color) => {
+    const N = 7;
+    const ring = Array.from({ length: N }, (_, i) => ({
+        a: 70 + i * 48 + p.random(-8, 8),
+        b: (0.32 + p.random(0.1)) * (70 + i * 48),
+        tilt: -0.45 + p.random(-0.12, 0.12),
+        phase: p.random(Math.PI * 2),
+        speed: 0.28 / (1 + i * 0.35),
+    }));
+    return (t) => {
+        p.clear();
+        const c = p.color(color);
+        const cx = p.width * 0.82;
+        const cy = p.height * 0.9;
+        p.noFill();
+        for (const r of ring) {
+            c.setAlpha(60);
+            p.stroke(c);
+            p.strokeWeight(1);
+            p.push();
+            p.translate(cx, cy);
+            p.rotate(r.tilt);
+            p.ellipse(0, 0, r.a * 2, r.b * 2);
+            const ang = r.phase + t * r.speed;
+            const x = Math.cos(ang) * r.a;
+            const y = Math.sin(ang) * r.b;
+            c.setAlpha(230);
+            p.noStroke();
+            p.fill(c);
+            p.circle(x, y, 4);
+            p.pop();
+            p.noFill();
+        }
+        c.setAlpha(255);
+        p.noStroke();
+        p.fill(c);
+        p.circle(cx, cy, 6);
+    };
+};
+
+const sketches: Record<Pattern, Sketch> = { concentric, halftone, lattice, waves, orbits };
 
 export default function Accent({
     pattern,

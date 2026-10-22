@@ -12,27 +12,23 @@ import { EMAIL, PUBLICATION } from "@/lib/site";
    builders */
 const projects: Project[] = [
     {
-        name: "CNTRC AI",
-        kind: "Platform",
-        years: "2023",
-        desc: "Long-term visitor analytics platform.",
-        stack: "Next.js",
-        shot: "/projects/cntrc.webp",
-        accent: { pattern: "concentric", color: "#f2b631" },
-        link: { label: "cntrc.ai", href: "https://www.cntrc.ai/" },
+        name: "Space Truckers",
+        kind: "Game",
+        years: "2026–",
+        desc: "A multiplayer space-trucking sim flown entirely from the cab. The Company deals you wrecks and dead stations out in the dark; you fly out, strip them, and keep whatever it didn't ask for.",
+        stack: "Godot 4, C#",
+        art: "/projects/space-truckers.webp",
+        accent: { pattern: "orbits", color: "#e8742f" },
     },
     {
-        name: "Detoxer",
-        kind: "Browser extension",
-        years: "2023",
-        desc: "Firefox extension for social media detox.",
-        stack: "Firefox WebExtension",
-        shot: "/projects/detoxer.webp",
-        accent: { pattern: "halftone", color: "#3ecf6e" },
-        link: {
-            label: "addons.mozilla.org",
-            href: "https://addons.mozilla.org/en-US/firefox/addon/detoxer",
-        },
+        name: "Kupigo",
+        kind: "Platform",
+        years: "2025–",
+        desc: "Find a home on the Spanish coast and get introduced to one certified local agent who speaks your language. Browse listings, or describe what you want and let the guide narrow it down.",
+        stack: "Next.js, Payload, OpenAI",
+        shot: "/projects/kupigo.webp",
+        accent: { pattern: "halftone", color: "#e8742f" },
+        link: { label: "kupigo.net", href: "https://kupigo.net/" },
     },
 ];
 
@@ -54,7 +50,7 @@ const tools: Project[] = [
         name: "FLIP Water Sim",
         kind: "Godot extension",
         years: "2024",
-        desc: "FLIP fluid simulation for Godot 4 in C++.",
+        desc: "2D FLIP fluid simulation for Godot 4, in C++.",
         stack: "C++, Godot 4",
         accent: { pattern: "waves", color: "#8b6cf0" },
         link: {

@@ -10,12 +10,16 @@ export interface Project {
     years: string;
     desc: string;
     stack: string;
-    /* 16:10 screenshot under public/projects */
+    /* 16:10 screenshot under public/projects, shown as a window onto the
+       app running off the card's corner */
     shot?: string;
+    /* or a picture (a logo, a patch) shown whole in the right half */
+    art?: string;
     /* the card's accent, drawn behind the screenshot */
     accent: { pattern: Pattern; color: string };
-    /* shown as the footnote, so a real domain or path rather than "Website" */
-    link: { label: string; href: string };
+    /* shown as the footnote, so a real domain or path rather than "Website";
+       absent for work with nothing public yet */
+    link?: { label: string; href: string };
 }
 
 /* One card per project. Kind and name top-left, years top-right, stack and
@@ -25,9 +29,10 @@ export interface Project {
    accent zooms slowly and starts moving, and the screenshot lifts. */
 export default function ProjectCard({ project }: { project: Project }) {
     const [hovered, setHovered] = useState(false);
+    const Tag = project.link ? "a" : "div";
     return (
-        <a
-            href={project.link.href}
+        <Tag
+            href={project.link?.href}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             className="group relative grid md:grid-cols-[5fr_6fr] overflow-hidden rounded-md bg-mist shadow-(--shadow-card) hover:bg-mist-strong transition-colors duration-300"
@@ -48,9 +53,13 @@ export default function ProjectCard({ project }: { project: Project }) {
                 </div>
                 <div className="mt-auto pt-8 text-xs text-muted">
                     <span className="block">{project.stack}</span>
-                    <span className="block font-mono text-ink mt-0.5 break-all group-hover:underline underline-offset-4">
-                        {project.link.label}
-                    </span>
+                    {project.link ? (
+                        <span className="block font-mono text-ink mt-0.5 break-all group-hover:underline underline-offset-4">
+                            {project.link.label}
+                        </span>
+                    ) : (
+                        <span className="block font-mono mt-0.5">in development</span>
+                    )}
                 </div>
             </div>
 
@@ -60,7 +69,7 @@ export default function ProjectCard({ project }: { project: Project }) {
                     color={project.accent.color}
                     hovered={hovered}
                     className={`absolute inset-0 origin-bottom-right [mask-image:linear-gradient(to_right,transparent,black_35%)] motion-safe:transition-transform duration-700 ease-out group-hover:scale-105 ${
-                        project.shot ? "opacity-70" : ""
+                        project.shot || project.art ? "opacity-70" : ""
                     }`}
                 />
                 {project.shot && (
@@ -71,7 +80,15 @@ export default function ProjectCard({ project }: { project: Project }) {
                         className="absolute left-8 md:left-[14%] top-10 md:top-14 w-[130%] md:w-[108%] max-w-none rounded-tl-md shadow-(--shadow-float) motion-safe:transition-transform duration-500 ease-out group-hover:-translate-y-1"
                     />
                 )}
+                {project.art && (
+                    <img
+                        src={project.art}
+                        alt={`${project.name} artwork`}
+                        loading="lazy"
+                        className="absolute inset-x-8 md:inset-x-12 top-1/2 -translate-y-1/2 mx-auto max-h-[80%] w-auto [filter:drop-shadow(0_12px_24px_rgb(0_0_0/0.35))] motion-safe:transition-transform duration-500 ease-out group-hover:-translate-y-[calc(50%+4px)]"
+                    />
+                )}
             </div>
-        </a>
+        </Tag>
     );
 }
