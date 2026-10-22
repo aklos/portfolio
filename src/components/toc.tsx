@@ -11,18 +11,18 @@ export function TocList({
     active?: string | null;
 }) {
     return (
-        <ul className="flex flex-col gap-2.5 border-l border-line">
+        <ul className="flex flex-col gap-2.5">
             {entries.map((entry) => (
                 <li
                     key={entry.id}
-                    className={entry.depth === 3 ? "pl-8" : "pl-4"}
+                    className={entry.depth === 3 ? "pl-4" : ""}
                 >
                     <a
                         href={`#${entry.id}`}
                         className={`block leading-snug transition-colors ${
                             active === entry.id
-                                ? "text-signal"
-                                : "text-muted hover:text-signal"
+                                ? "text-ink"
+                                : "text-muted hover:text-ink"
                         }`}
                     >
                         {entry.text}
@@ -54,7 +54,7 @@ export default function Toc({ entries }: { entries: TocEntry[] }) {
 
     return (
         <nav aria-label="Table of contents" className="text-sm">
-            <p className="font-mono text-xs uppercase tracking-wider text-muted mb-4">
+            <p className="text-sm text-muted mb-4">
                 On this page
             </p>
             <TocList entries={entries} active={active} />

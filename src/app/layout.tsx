@@ -1,51 +1,67 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-    Bricolage_Grotesque,
-    IBM_Plex_Sans,
-    IBM_Plex_Mono,
-} from "next/font/google";
-import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
-import { RiTwitterXFill } from "react-icons/ri";
+import { Bebas_Neue, Geist_Mono, Schibsted_Grotesk } from "next/font/google";
 import ThemeToggle from "@/components/theme-toggle";
-import Pattern from "@/components/pattern";
+import { EMAIL, PUBLICATION } from "@/lib/site";
 
-const bricolage = Bricolage_Grotesque({
+const schibsted = Schibsted_Grotesk({
     subsets: ["latin"],
-    variable: "--font-bricolage",
+    variable: "--font-schibsted",
 });
 
-const plexSans = IBM_Plex_Sans({
+/* accent face, closest to the Bit Rot cover lettering: section headings and
+   post titles */
+const bebas = Bebas_Neue({
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-    variable: "--font-plex-sans",
+    weight: "400",
+    variable: "--font-bebas",
 });
 
-const plexMono = IBM_Plex_Mono({
+const geistMono = Geist_Mono({
     subsets: ["latin"],
-    weight: ["400", "500"],
-    variable: "--font-plex-mono",
+    variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://alexklos.ca"),
     title: "Alex Klos",
-    description: "Software developer",
-    icons: {
-        icon: "/favicon.svg",
+    description: "Alex Klos builds products, apps and games, and writes Bit Rot.",
+    openGraph: {
+        type: "website",
+        siteName: "Alex Klos",
+        url: "/",
+        title: "Alex Klos",
+        description: "I build products, apps & games.",
+    },
+    twitter: {
+        card: "summary_large_image",
+        creator: "@alexmklos",
     },
     alternates: {
         types: {
-            "application/rss+xml": [{ url: "/feed.xml", title: "Alex Klos" }],
+            "application/rss+xml": [
+                { url: "/feed.xml", title: "Alex Klos" },
+                { url: PUBLICATION.feed, title: PUBLICATION.name },
+            ],
         },
     },
 };
 
-const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})()`;
+/* dark unless the visitor has picked light with the toggle */
+const themeInit = `(function(){try{if(localStorage.getItem("theme")!=="light")document.documentElement.classList.add("dark")}catch(e){document.documentElement.classList.add("dark")}})()`;
 
-const navLink =
-    "relative text-sm text-muted hover:text-signal transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-signal after:scale-x-0 after:origin-left hover:after:scale-x-100 motion-safe:after:transition-transform after:duration-200";
+const navLink = "text-sm text-muted hover:text-ink transition-colors";
+
+const socials = [
+    { label: "GitHub", href: "https://github.com/aklos" },
+    {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/in/alexander-klos-460787120",
+    },
+    { label: "X", href: "https://x.com/alexmklos" },
+    { label: "RSS", href: "/feed.xml" },
+];
 
 export default function RootLayout({
     children,
@@ -58,85 +74,60 @@ export default function RootLayout({
                 <script dangerouslySetInnerHTML={{ __html: themeInit }} />
             </head>
             <body
-                className={`${bricolage.variable} ${plexSans.variable} ${plexMono.variable} font-body bg-paper text-ink`}
+                className={`${schibsted.variable} ${bebas.variable} ${geistMono.variable} font-sans bg-paper text-ink antialiased`}
             >
-                <header className="max-w-4xl mx-auto px-6 py-6 flex items-center justify-between gap-4">
-                    <Link
-                        href="/"
-                        className="group glitch-target relative inline-block font-display font-bold text-xl tracking-tight"
-                    >
-                        Alex Klos
-                        <span className="absolute left-0 right-0 -bottom-1 h-[6px] overflow-hidden">
-                            <Pattern
-                                variant="decay"
-                                className="absolute left-0 top-0 h-full w-[calc(100%+12px)] text-signal motion-safe:group-hover:animate-wave"
-                            />
-                        </span>
-                    </Link>
-                    <nav className="flex gap-5 items-center">
-                        <Link href="/blog" className={navLink}>
-                            Blog
-                        </Link>
-                        <a
-                            href="mailto:alex@prohobo.dev"
-                            className={`${navLink} hidden sm:inline-block`}
-                        >
-                            alex@prohobo.dev
-                        </a>
-                        <span className="w-px h-4 bg-line" />
-                        <a
-                            href="https://github.com/aklos"
-                            aria-label="GitHub"
-                            className="text-muted hover:text-signal transition-colors"
-                        >
-                            <AiFillGithub className="text-lg" />
-                        </a>
-                        <a
-                            href="https://www.linkedin.com/in/alexander-klos-460787120"
-                            aria-label="LinkedIn"
-                            className="text-muted hover:text-signal transition-colors"
-                        >
-                            <AiFillLinkedin className="text-lg" />
-                        </a>
-                        <a
-                            href="https://x.com/alexmklos"
-                            aria-label="X"
-                            className="text-muted hover:text-signal transition-colors"
-                        >
-                            <RiTwitterXFill className="text-base" />
-                        </a>
-                        <span className="w-px h-4 bg-line" />
-                        <ThemeToggle />
-                    </nav>
+                <header>
+                    <div className="px-6 md:px-8 h-14 flex items-center justify-between gap-4">
+                        <nav className="flex items-center gap-6 md:gap-8">
+                            <Link
+                                href="/"
+                                className="font-semibold hover:text-muted transition-colors"
+                            >
+                                Alex Klos
+                            </Link>
+                            <Link
+                                href="/#projects"
+                                className={`${navLink} hidden sm:inline`}
+                            >
+                                Projects
+                            </Link>
+                            <Link
+                                href="/#tools"
+                                className={`${navLink} hidden sm:inline`}
+                            >
+                                Tools
+                            </Link>
+                            <Link href="/blog" className={navLink}>
+                                Blog
+                            </Link>
+                        </nav>
+                        <div className="flex items-center gap-4">
+                            <a
+                                href={`mailto:${EMAIL}`}
+                                className="btn btn-sm btn-secondary max-sm:hidden"
+                            >
+                                Contact
+                            </a>
+                            <ThemeToggle />
+                        </div>
+                    </div>
                 </header>
                 {children}
-                <footer className="max-w-4xl mx-auto px-6 pb-16">
-                    <div className="pt-16 flex items-center justify-between text-xs text-muted">
-                        <div className="flex gap-5 items-center">
-                            <a
-                                href="https://github.com/aklos"
-                                className="hover:text-signal transition-colors"
-                            >
-                                <AiFillGithub className="text-lg" />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/alexander-klos-460787120"
-                                className="hover:text-signal transition-colors"
-                            >
-                                <AiFillLinkedin className="text-lg" />
-                            </a>
-                            <a
-                                href="https://x.com/alexmklos"
-                                className="hover:text-signal transition-colors"
-                            >
-                                <RiTwitterXFill className="text-base" />
-                            </a>
+                <footer className="max-w-4xl mx-auto px-6 pb-12">
+                    <div className="pt-8 flex flex-wrap items-center justify-between gap-4 text-sm text-muted">
+                        <span>&copy; {new Date().getFullYear()} Alex Klos</span>
+                        <div className="flex gap-5">
+                            {socials.map((s) => (
+                                <a
+                                    key={s.label}
+                                    href={s.href}
+                                    className="hover:text-ink transition-colors"
+                                >
+                                    {s.label}
+                                </a>
+                            ))}
                         </div>
-                        <div>&copy; {new Date().getFullYear()}</div>
                     </div>
-                    <p className="mt-4 text-xs text-muted/50">
-                        Alexander Klos / Suite 59, 30 Durham Road, London, SW20 0TW
-                    </p>
                 </footer>
             </body>
         </html>

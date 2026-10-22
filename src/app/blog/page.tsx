@@ -1,46 +1,49 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { formatDate, getAllPosts } from "@/lib/blog";
-import SectionHeading from "@/components/section-heading";
+import Link from "next/link";
+import { getAllPosts } from "@/lib/blog";
+import { PUBLICATION, SITE_DESCRIPTION } from "@/lib/site";
+import PostList from "@/components/post-list";
+import { SubscribeButton } from "@/components/subscribe";
 
 export const metadata: Metadata = {
-    title: "Blog — Alex Klos",
-    description: "Writing about software engineering, projects, and more.",
+    title: "Blog | Alex Klos",
+    description: SITE_DESCRIPTION,
 };
 
+/* Everything written, newest first, with the publication introduced above
+   the list. Posts that belong to it are marked in their rows and link
+   through to its own page. */
 export default function BlogIndex() {
     const posts = getAllPosts();
 
     return (
-        <div className="min-h-screen">
-            <section className="max-w-4xl mx-auto px-6 pt-10 pb-24">
-                <SectionHeading
-                    title="Blog"
-                    sub="Writing about software and more"
-                />
+        <main className="max-w-4xl mx-auto px-6 pt-12 md:pt-20 pb-24">
+            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mb-10">
+                Blog
+            </h1>
 
-                <div className="border-t border-line">
-                    {posts.map((post) => (
-                        <Link
-                            key={post.slug}
-                            href={`/blog/${post.slug}`}
-                            className="group glitch-trigger flex items-baseline justify-between gap-4 py-5 border-b border-line"
-                        >
-                            <div className="min-w-0">
-                                <span className="glitch-target font-display text-lg font-bold block truncate">
-                                    {post.title}
-                                </span>
-                                <span className="text-sm text-muted truncate block mt-0.5">
-                                    {post.description}
-                                </span>
-                            </div>
-                            <span className="font-mono text-xs text-muted shrink-0">
-                                {formatDate(post.date)}
-                            </span>
-                        </Link>
-                    ))}
-                </div>
+            <section className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 rounded-md bg-mist p-5 mb-12">
+                <Link href={PUBLICATION.path} className="group flex items-center gap-4">
+                    <img
+                        src="/bitrot.webp"
+                        alt={PUBLICATION.name}
+                        width={1600}
+                        height={1600}
+                        className="size-14 rounded-md object-cover object-top shrink-0"
+                    />
+                    <div>
+                        <p className="font-semibold tracking-tight group-hover:text-teal transition-colors">
+                            {PUBLICATION.name}
+                        </p>
+                        <p className="text-sm text-muted mt-0.5">
+                            {PUBLICATION.tagline} Free by email.
+                        </p>
+                    </div>
+                </Link>
+                <SubscribeButton />
             </section>
-        </div>
+
+            <PostList posts={posts} />
+        </main>
     );
 }

@@ -4,64 +4,61 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-    /* light theme — "gallery print": neutral cool off-white, near-black ink.
-       Two accents from the Bitrot mark: signal (electric glitch blue — the
-       star: links, hovers, data) and emulsion (warm film amber — the rare
-       analog note: current dates, quote borders) */
-    --theme-paper: #f6f6f4;
-    --theme-ink: #16181c;
-    --theme-emulsion: #a8551f;
-    --theme-signal: #1568b8;
-    --theme-muted: #666b72;
-    --theme-line: #e2e2de;
-    --theme-mist: #ececea;
-
-    /* glitch-hover tuning — colored fringes carry far more contrast against
-       light paper than against the dark ground, so light mode runs at a
-       fraction of dark's opacity and half its amplitude */
-    --glitch-strength: 20%;
-    --glitch-shift: 1px;
+    /* Two related themes. The site's own is neutral charcoal (light: soft
+       grey) with white cards; colour comes only from each project's accent.
+       Bit Rot (.theme-bitrot, below) is the cover's world: teal-black,
+       cream type, teal actions with dust specks. Teal is shared by both. */
+    --theme-paper: #f3f3f2;
+    --theme-ink: #111111;
+    --theme-teal: #0293a7;
+    --theme-muted: #6b6b6b;
+    --theme-line: #e3e3e1;
+    --theme-mist: #ffffff;
+    --theme-mist-strong: #fafafa;
+    /* shadows: soft and short on the light ground */
+    --shadow-card: 0 0 0 1px rgb(20 20 20 / 0.06), 0 1px 2px rgb(20 20 20 / 0.05),
+        0 10px 28px -12px rgb(20 20 20 / 0.16);
+    --shadow-float: 0 12px 32px -8px rgb(20 20 20 / 0.28);
+    --shadow-button: 0 1px 2px rgb(20 20 20 / 0.12);
+    /* the cover's dust, used by the specks utility and the primary button */
+    --specks: url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27520%27%20height=%27520%27%3E%3Cg%20fill=%27%23fadaac%27%3E%3Ccircle%20cx=%27168.4%27%20cy=%2778.4%27%20r=%271.3%27%20fill-opacity=%270.27%27/%3E%3Ccircle%20cx=%27427.1%27%20cy=%2748.9%27%20r=%271.0%27%20fill-opacity=%270.28%27/%3E%3Ccircle%20cx=%27263.9%27%20cy=%2719.5%27%20r=%270.8%27%20fill-opacity=%270.44%27/%3E%3Ccircle%20cx=%27125.1%27%20cy=%27286.5%27%20r=%270.5%27%20fill-opacity=%270.62%27/%3E%3Ccircle%20cx=%2764.4%27%20cy=%27116.1%27%20r=%271.3%27%20fill-opacity=%270.51%27/%3E%3Ccircle%20cx=%2732.2%27%20cy=%27304.5%27%20r=%270.5%27%20fill-opacity=%270.69%27/%3E%3Ccircle%20cx=%2724.2%27%20cy=%27446.4%27%20r=%270.7%27%20fill-opacity=%270.44%27/%3E%3Ccircle%20cx=%27281.2%27%20cy=%27296.9%27%20r=%271.0%27%20fill-opacity=%270.62%27/%3E%3Ccircle%20cx=%2794.0%27%20cy=%27302.4%27%20r=%271.3%27%20fill-opacity=%270.33%27/%3E%3Ccircle%20cx=%2750.7%27%20cy=%27370.3%27%20r=%271.0%27%20fill-opacity=%270.28%27/%3E%3Ccircle%20cx=%27107.1%27%20cy=%27353.8%27%20r=%270.8%27%20fill-opacity=%270.6%27/%3E%3Ccircle%20cx=%27242.1%27%20cy=%27480.2%27%20r=%270.7%27%20fill-opacity=%270.38%27/%3E%3Ccircle%20cx=%27413.1%27%20cy=%27363.5%27%20r=%270.6%27%20fill-opacity=%270.29%27/%3E%3Ccircle%20cx=%27156.1%27%20cy=%27257.5%27%20r=%270.7%27%20fill-opacity=%270.58%27/%3E%3Ccircle%20cx=%27149.7%27%20cy=%27509.7%27%20r=%270.5%27%20fill-opacity=%270.48%27/%3E%3Ccircle%20cx=%2785.8%27%20cy=%27177.9%27%20r=%270.8%27%20fill-opacity=%270.44%27/%3E%3Ccircle%20cx=%27500.2%27%20cy=%2740.4%27%20r=%271.0%27%20fill-opacity=%270.51%27/%3E%3Ccircle%20cx=%27455.2%27%20cy=%27163.1%27%20r=%271.3%27%20fill-opacity=%270.41%27/%3E%3Ccircle%20cx=%27258.3%27%20cy=%27414.4%27%20r=%270.5%27%20fill-opacity=%270.63%27/%3E%3Ccircle%20cx=%27491.2%27%20cy=%27246.5%27%20r=%271.3%27%20fill-opacity=%270.28%27/%3E%3Ccircle%20cx=%27380.2%27%20cy=%27161.0%27%20r=%271.0%27%20fill-opacity=%270.7%27/%3E%3Ccircle%20cx=%27427.4%27%20cy=%27148.0%27%20r=%270.8%27%20fill-opacity=%270.65%27/%3E%3Ccircle%20cx=%27180.4%27%20cy=%27489.1%27%20r=%270.7%27%20fill-opacity=%270.33%27/%3E%3Ccircle%20cx=%2760.9%27%20cy=%2730.7%27%20r=%270.7%27%20fill-opacity=%270.31%27/%3E%3Ccircle%20cx=%27128.8%27%20cy=%27203.3%27%20r=%270.8%27%20fill-opacity=%270.29%27/%3E%3Ccircle%20cx=%27233.6%27%20cy=%27285.7%27%20r=%270.6%27%20fill-opacity=%270.62%27/%3E%3Ccircle%20cx=%27449.3%27%20cy=%27144.8%27%20r=%270.8%27%20fill-opacity=%270.69%27/%3E%3Ccircle%20cx=%27355.0%27%20cy=%27197.8%27%20r=%270.6%27%20fill-opacity=%270.32%27/%3E%3Ccircle%20cx=%2791.6%27%20cy=%27120.6%27%20r=%270.6%27%20fill-opacity=%270.26%27/%3E%3Ccircle%20cx=%27432.2%27%20cy=%2794.8%27%20r=%270.7%27%20fill-opacity=%270.25%27/%3E%3Ccircle%20cx=%27217.9%27%20cy=%27192.0%27%20r=%271.0%27%20fill-opacity=%270.39%27/%3E%3Ccircle%20cx=%2765.3%27%20cy=%27446.8%27%20r=%271.0%27%20fill-opacity=%270.54%27/%3E%3Ccircle%20cx=%27384.7%27%20cy=%27237.5%27%20r=%271.3%27%20fill-opacity=%270.61%27/%3E%3Ccircle%20cx=%27204.0%27%20cy=%27207.5%27%20r=%270.5%27%20fill-opacity=%270.47%27/%3E%3Ccircle%20cx=%27208.2%27%20cy=%2799.1%27%20r=%270.6%27%20fill-opacity=%270.45%27/%3E%3Ccircle%20cx=%2757.2%27%20cy=%27312.4%27%20r=%270.5%27%20fill-opacity=%270.25%27/%3E%3Ccircle%20cx=%2778.7%27%20cy=%2752.8%27%20r=%270.7%27%20fill-opacity=%270.53%27/%3E%3Ccircle%20cx=%2736.6%27%20cy=%27108.1%27%20r=%270.8%27%20fill-opacity=%270.32%27/%3E%3Ccircle%20cx=%27131.2%27%20cy=%27180.6%27%20r=%270.7%27%20fill-opacity=%270.46%27/%3E%3Ccircle%20cx=%2760.0%27%20cy=%27253.8%27%20r=%270.8%27%20fill-opacity=%270.47%27/%3E%3Ccircle%20cx=%27162.2%27%20cy=%2774.9%27%20r=%271.3%27%20fill-opacity=%270.4%27/%3E%3Ccircle%20cx=%27137.7%27%20cy=%27431.0%27%20r=%270.6%27%20fill-opacity=%270.48%27/%3E%3Ccircle%20cx=%27106.7%27%20cy=%27495.1%27%20r=%270.7%27%20fill-opacity=%270.32%27/%3E%3Ccircle%20cx=%27282.4%27%20cy=%2714.1%27%20r=%271.0%27%20fill-opacity=%270.38%27/%3E%3Ccircle%20cx=%27334.3%27%20cy=%2747.3%27%20r=%270.7%27%20fill-opacity=%270.48%27/%3E%3Ccircle%20cx=%27472.3%27%20cy=%27185.0%27%20r=%270.6%27%20fill-opacity=%270.49%27/%3E%3Crect%20x=%27405.1%27%20y=%27171.4%27%20width=%275.6%27%20height=%270.7%27%20fill-opacity=%270.45%27%20transform=%27rotate%2825%20405.1%20171.4%29%27/%3E%3Crect%20x=%27443.4%27%20y=%27419.2%27%20width=%279.7%27%20height=%270.7%27%20fill-opacity=%270.26%27%20transform=%27rotate%2819%20443.4%20419.2%29%27/%3E%3Crect%20x=%27269.2%27%20y=%27184.9%27%20width=%274.2%27%20height=%270.7%27%20fill-opacity=%270.27%27%20transform=%27rotate%28-38%20269.2%20184.9%29%27/%3E%3Crect%20x=%27134.8%27%20y=%27360.1%27%20width=%2710.7%27%20height=%270.7%27%20fill-opacity=%270.43%27%20transform=%27rotate%28-4%20134.8%20360.1%29%27/%3E%3Crect%20x=%27513.8%27%20y=%27496.6%27%20width=%276.6%27%20height=%270.7%27%20fill-opacity=%270.26%27%20transform=%27rotate%28-22%20513.8%20496.6%29%27/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .dark {
-    /* dark theme — neutral-cool near-black, soft white text; amber glows
-       against it as a small warm undertone instead of soaking the page */
-    --theme-paper: #101114;
-    --theme-ink: #eaeae7;
-    --theme-emulsion: #dd8f4e;
-    --theme-signal: #58b0f0;
-    --theme-muted: #969ba3;
-    --theme-line: #26282d;
-    --theme-mist: #1a1c20;
+    /* dark theme, the default: charcoal, cards one step lighter */
+    --theme-paper: #141414;
+    --theme-ink: #f4f4f4;
+    --theme-muted: #8c8c8c;
+    --theme-line: #262626;
+    --theme-mist: #1e1e1e;
+    --theme-mist-strong: #242424;
+    /* deeper on the dark ground, where a soft shadow would vanish */
+    --shadow-card: none;
+    --shadow-float: 0 16px 48px rgb(0 0 0 / 0.55);
+    --shadow-button: 0 1px 2px rgb(0 0 0 / 0.3);
+}
 
-    --glitch-strength: 65%;
-    --glitch-shift: 2px;
+/* The publication's theme, scoped to its page and its posts. It sits on the site's own ground
+   and surfaces, so the page background runs unbroken into the footer; what
+   it changes is the type: cream on the dark ground, like the cover. */
+.dark .theme-bitrot {
+    --theme-ink: #f2e6d3;
+    --theme-muted: #8d9796;
 }
 
 @theme inline {
-    --container-2xl: 1400px;
-
     --color-paper: var(--theme-paper);
     --color-ink: var(--theme-ink);
-    --color-emulsion: var(--theme-emulsion);
-    --color-signal: var(--theme-signal);
+    --color-teal: var(--theme-teal);
     --color-muted: var(--theme-muted);
     --color-line: var(--theme-line);
     --color-mist: var(--theme-mist);
+    --color-mist-strong: var(--theme-mist-strong);
 
-    --font-display: var(--font-bricolage);
-    --font-body: var(--font-plex-sans);
-    --font-mono: var(--font-plex-mono);
-}
-
-@theme {
-    --animate-wave: wave 0.6s linear infinite;
-
-    @keyframes wave {
-        to {
-            transform: translateX(-12px);
-        }
-    }
+    --font-sans: var(--font-schibsted);
+    --font-mono: var(--font-geist-mono);
+    /* the cover's lettering is closest to Bebas Neue, thickened below */
+    --font-display: var(--font-bebas);
 }
 
 @utility container {
@@ -69,46 +66,115 @@
     padding-inline: 2rem;
 }
 
-/* Chromatic-aberration hover — the site's one loud gesture. The RGB fringe
-   is drawn with the two accents so the glitch stays on-palette in both
-   themes. `glitch-target` fringes on its own hover; a wrapping link marked
-   `glitch-trigger` fringes its target instead. */
-@media (hover: hover) {
-    .glitch-target:hover,
-    .glitch-trigger:hover .glitch-target {
-        text-shadow:
-            calc(-1 * var(--glitch-shift)) 0 color-mix(in srgb, var(--theme-emulsion) var(--glitch-strength), transparent),
-            var(--glitch-shift) 0 color-mix(in srgb, var(--theme-signal) var(--glitch-strength), transparent);
-    }
-    @media (prefers-reduced-motion: no-preference) {
-        .glitch-target:hover,
-        .glitch-trigger:hover .glitch-target {
-            animation: rgb-split 0.18s steps(2, end) 1;
-        }
-    }
-}
-
-@keyframes rgb-split {
-    0% {
-        text-shadow:
-            calc(1.5 * var(--glitch-shift)) 0 color-mix(in srgb, var(--theme-emulsion) var(--glitch-strength), transparent),
-            calc(-1.5 * var(--glitch-shift)) 0 color-mix(in srgb, var(--theme-signal) var(--glitch-strength), transparent);
-    }
-    50% {
-        text-shadow:
-            calc(-1.5 * var(--glitch-shift)) 1px color-mix(in srgb, var(--theme-emulsion) var(--glitch-strength), transparent),
-            calc(1.5 * var(--glitch-shift)) -1px color-mix(in srgb, var(--theme-signal) var(--glitch-strength), transparent);
-    }
-    100% {
-        text-shadow:
-            calc(-1 * var(--glitch-shift)) 0 color-mix(in srgb, var(--theme-emulsion) var(--glitch-strength), transparent),
-            var(--glitch-shift) 0 color-mix(in srgb, var(--theme-signal) var(--glitch-strength), transparent);
-    }
-}
-
 body {
     background-color: var(--theme-paper);
     color: var(--theme-ink);
+}
+
+/* The cover's dust: a seeded scatter of cream specks and short scratches,
+   not noise. Only for surfaces that carry colour (teal buttons, coloured
+   slabs or heroes); the page and the neutral cards stay clean. */
+@utility specks {
+    background-image: var(--specks);
+}
+
+/* Buttons: compact, small radius, a top highlight and a soft drop so they
+   read as pressable. Primary is solid ink; accent is Bit Rot's teal with
+   the cover's specks over a slight gradient; secondary is a translucent
+   fill with a hairline. */
+@utility btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.5rem;
+    padding-inline: 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background-color 150ms, box-shadow 150ms, filter 150ms;
+}
+@utility btn-sm {
+    height: 2rem;
+    padding-inline: 0.75rem;
+}
+@utility btn-primary {
+    color: var(--theme-paper);
+    background-color: var(--theme-ink);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25), var(--shadow-button);
+    &:hover {
+        background-color: color-mix(in srgb, var(--theme-ink) 88%, var(--theme-paper));
+    }
+}
+@utility btn-accent {
+    color: #0b1213;
+    background-image: var(--specks),
+        linear-gradient(to bottom, color-mix(in srgb, var(--theme-teal), white 14%), var(--theme-teal));
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3),
+        0 0 0 1px color-mix(in srgb, var(--theme-teal), black 25%),
+        0 2px 8px -2px color-mix(in srgb, var(--theme-teal) 60%, transparent);
+    &:hover {
+        filter: brightness(1.08);
+    }
+}
+@utility btn-secondary {
+    color: var(--theme-ink);
+    background-color: color-mix(in srgb, var(--theme-ink) 5%, transparent);
+    box-shadow: inset 0 0 0 1px var(--theme-line),
+        inset 0 1px 0 color-mix(in srgb, var(--theme-ink) 6%, transparent);
+    &:hover {
+        background-color: color-mix(in srgb, var(--theme-ink) 9%, transparent);
+    }
+}
+
+/* Bebas Neue has one weight and the cover's lettering is heavier: an
+   outline in the text colour adds the weight. Bebas has no lowercase, so
+   this face is for uppercase accents only (section headings, post
+   titles), never running copy or the hero. */
+.font-display {
+    -webkit-text-stroke: 0.03em currentColor;
+    paint-order: stroke fill;
+}
+
+/* The Bit Rot hero image fades out into the page over its lower 62%, with
+   eased stops so the fade has no visible top edge. A mask on the image
+   rather than a scrim over it: one layer, nothing to bleed at the corners,
+   and whatever the page ground is shows through. */
+/* A sparse dot grid behind the top of the home page, weighted to the
+   right where the hero leaves room, and gone before the first section. The
+   dots are the ink at low alpha, so each theme calibrates itself. */
+@utility dot-grid {
+    background-image: radial-gradient(
+        circle,
+        color-mix(in oklab, var(--theme-ink) 14%, transparent) 1px,
+        transparent 1.5px
+    );
+    background-size: 22px 22px;
+    mask-image:
+        linear-gradient(to bottom, black 40%, transparent 100%),
+        radial-gradient(
+            ellipse 70% 100% at 85% 0%,
+            black 20%,
+            transparent 100%
+        );
+    mask-composite: intersect;
+}
+
+@utility hero-fade {
+    mask-image: linear-gradient(
+        to top,
+        transparent 0%,
+        rgb(0 0 0 / 0.08) 14%,
+        rgb(0 0 0 / 0.3) 26%,
+        rgb(0 0 0 / 0.62) 38%,
+        rgb(0 0 0 / 0.88) 50%,
+        black 62%
+    );
+}
+
+::selection {
+    background-color: var(--theme-teal);
+    color: #121314;
 }
 
 /* Point typography plugin colors at theme vars so prose follows the theme
@@ -117,13 +183,13 @@ body {
     --tw-prose-body: color-mix(in srgb, var(--theme-ink) 88%, transparent);
     --tw-prose-headings: var(--theme-ink);
     --tw-prose-lead: var(--theme-muted);
-    --tw-prose-links: var(--theme-signal);
+    --tw-prose-links: var(--theme-ink);
     --tw-prose-bold: var(--theme-ink);
     --tw-prose-counters: var(--theme-muted);
-    --tw-prose-bullets: var(--theme-signal);
+    --tw-prose-bullets: var(--theme-muted);
     --tw-prose-hr: var(--theme-line);
     --tw-prose-quotes: var(--theme-muted);
-    --tw-prose-quote-borders: var(--theme-emulsion);
+    --tw-prose-quote-borders: transparent;
     --tw-prose-captions: var(--theme-muted);
     --tw-prose-code: var(--theme-ink);
     --tw-prose-pre-code: var(--theme-ink);
@@ -132,9 +198,9 @@ body {
     --tw-prose-td-borders: var(--theme-line);
 }
 
-/* Dark paper is colored, not black — body copy needs more ink to stay crisp */
+/* Long-form copy a step softer than headings on the dark ground */
 .dark .prose {
-    --tw-prose-body: color-mix(in srgb, var(--theme-ink) 96%, transparent);
+    --tw-prose-body: color-mix(in srgb, var(--theme-ink) 82%, transparent);
 }
 
 /* Roomier paragraph rhythm for longform (top-level only, not list items) */
@@ -153,13 +219,17 @@ body {
     scroll-margin-top: 2.5rem;
 }
 
-/* Links: blue, underline only on hover — matches inline links site-wide */
+/* Links: underlined in a faint rule that darkens on hover, matching inline
+   links site-wide */
 .prose a {
-    text-decoration: none;
+    color: var(--theme-ink);
+    font-weight: inherit;
+    text-decoration-color: color-mix(in srgb, var(--theme-ink) 30%, transparent);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 150ms;
 }
 .prose a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    text-decoration-color: var(--theme-teal);
 }
 
 /* Wide tables scroll in place instead of stretching the page on mobile */
@@ -168,7 +238,7 @@ body {
     overflow-x: auto;
 }
 
-/* Tighter list rhythm — default li margins read like paragraph gaps */
+/* Tighter list rhythm; default li margins read like paragraph gaps */
 .prose li {
     margin-block: 0.3em;
 }
@@ -179,13 +249,14 @@ body {
     margin-block: 0.3em;
 }
 
-/* No auto-inserted curly quotes — blockquotes double as asides/callouts */
+/* Blockquotes double as asides/callouts: a filled block, and no
+   auto-inserted curly quotes */
+.prose blockquote {
+    background-color: var(--theme-mist);
+    border-left-width: 0;
+    padding: 0.25em 1.25em;
+}
 .prose blockquote p:first-of-type::before,
 .prose blockquote p:last-of-type::after {
     content: none;
-}
-
-.github-calendar svg.react-activity-calendar__calendar {
-    width: 100%;
-    height: auto;
 }

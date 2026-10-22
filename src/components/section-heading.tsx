@@ -1,17 +1,26 @@
+import Link from "next/link";
+
+/* A quiet label above a group of tiles */
 export default function SectionHeading({
     title,
-    sub,
+    href,
+    linkLabel,
 }: {
     title: string;
-    sub?: string;
+    href?: string;
+    linkLabel?: string;
 }) {
     return (
-        <div className="mb-10">
-            <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight">
-                {title}
-                <span className="text-signal">.</span>
-            </h2>
-            {sub && <p className="text-sm text-muted mt-1">{sub}</p>}
+        <div className="flex items-baseline justify-between gap-4 mb-4">
+            <h2 className="text-base font-semibold">{title}</h2>
+            {href && linkLabel && (
+                <Link
+                    href={href}
+                    className="text-sm text-muted hover:text-ink transition-colors"
+                >
+                    {linkLabel}
+                </Link>
+            )}
         </div>
     );
 }

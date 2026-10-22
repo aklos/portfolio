@@ -24,6 +24,8 @@ import post as postlib
 from post import REPO_ROOT, fail
 
 CHANNEL = "substack"
+# the Substack is the publication's mailing list, so only its posts go there
+PUBLICATION = "bitrot"
 
 
 UNSPLASH_HOME = "https://unsplash.com/?utm_source=alexklos&utm_medium=referral"
@@ -86,6 +88,7 @@ def main() -> None:
 
     post = postlib.load(args.slug)
     postlib.require_channel(post, CHANNEL)
+    postlib.require_publication(post, PUBLICATION)
 
     markdown = f"{post.body}\n\n---\n\n{backlink(post)}"
 

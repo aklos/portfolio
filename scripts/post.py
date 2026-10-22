@@ -32,6 +32,8 @@ class Post:
     date: str
     description: str
     section: str
+    # which named publication this belongs to ("bitrot"), or None for a plain post
+    publication: str | None
     channels: list[str]
     cover: str | None
     cover_alt: str | None
@@ -81,6 +83,7 @@ def _read(path: Path) -> Post:
         date=str(meta["date"]),
         description=meta.get("description", ""),
         section=meta.get("section", "tech"),
+        publication=meta.get("publication") or None,
         channels=meta.get("channels", ["site"]),
         cover=meta.get("cover"),
         cover_alt=meta.get("coverAlt"),
@@ -180,6 +183,14 @@ def require_channel(post: Post, channel: str) -> None:
         fail(
             f"'{post.slug}' has channels {post.channels}; "
             f"add '{channel}' to its frontmatter to syndicate there"
+        )
+
+
+def require_publication(post: Post, publication: str) -> None:
+    if post.publication != publication:
+        fail(
+            f"'{post.slug}' has publication {post.publication!r}; "
+            f"set 'publication: {publication}' in its frontmatter to syndicate there"
         )
 
 

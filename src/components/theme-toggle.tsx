@@ -26,10 +26,10 @@ export default function ThemeToggle() {
             type="button"
             onClick={toggle}
             aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-            className="text-muted hover:text-signal transition-colors cursor-pointer"
+            className="text-muted hover:text-ink transition-colors cursor-pointer"
         >
             <span className={mounted ? "" : "invisible"}>
-                {dark ? <FiSun className="text-lg" /> : <FiMoon className="text-lg" />}
+                {dark ? <FiSun className="text-base" /> : <FiMoon className="text-base" />}
             </span>
         </button>
     );

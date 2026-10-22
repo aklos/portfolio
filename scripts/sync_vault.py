@@ -27,7 +27,7 @@ from post import DEFAULT_VAULT, POSTS_DIR, REPO_ROOT, fail
 # `toc` is deliberately absent: it's opt-in, so an unscaffolded draft is right.
 # The cover fields aren't here either — cover_picker.py writes those when there
 # is a cover to write, and they sync like anything else once it has.
-SCAFFOLD = ("title", "date", "description", "section", "channels", "linkedin")
+SCAFFOLD = ("title", "date", "description", "section", "publication", "channels", "linkedin")
 
 
 def split_frontmatter(text: str) -> tuple[list[str] | None, str]:
@@ -77,6 +77,7 @@ def scaffold_lines(
         "date": f'date: "{date.today().isoformat()}"',
         "description": 'description: ""',
         "section": "section: tech",
+        "publication": "publication:",
         "channels": "channels: [site]",
         "linkedin": "linkedin:",
     }

@@ -18,6 +18,7 @@ date: "2026-07-24"
 description: "Spoiler: we don't — we fix the trust problem instead."
 toc: true                              # optional table of contents
 section: tech                          # tech | culture | fiction
+publication: bitrot                    # bitrot, or empty for a plain blog post
 channels: [site, substack, linkedin]   # where it gets published
 cover: koala.jpg                       # written by the cover picker
 coverAlt: "A koala behind glass"
@@ -32,6 +33,12 @@ linkedin: |                            # the LinkedIn post copy, written per pos
 Everything below `description` is optional. Omitted, a post behaves as
 `section: tech` and `channels: [site]` — site only, which is how the older
 posts are set up.
+
+`publication: bitrot` makes a post part of Bit Rot: it gets the
+publication's type and subscribe box, appears on `/blog/bitrot` and in that
+page's feed, and is the only kind of post the Substack syndication accepts.
+Without it a post is a plain blog post, listed on `/blog` and in `/feed.xml`
+(which carries everything) in the site's own type.
 
 `channels` controls where a post appears. Fiction is typically
 `[substack]`, which keeps it off the site entirely while still syndicating.

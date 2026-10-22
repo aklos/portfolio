@@ -16,6 +16,9 @@ export interface TocEntry {
 
 export type Section = "tech" | "culture" | "fiction";
 export type Channel = "site" | "substack" | "linkedin";
+/* a post can belong to a named publication; without one it is a plain
+   blog post */
+export type Publication = "bitrot";
 
 export interface PostMeta {
     slug: string;
@@ -24,6 +27,7 @@ export interface PostMeta {
     description: string;
     /* which Substack section this belongs to */
     section: Section;
+    publication: Publication | null;
     /* where this gets published; fiction is typically substack-only */
     channels: Channel[];
     /* filename under public/covers, e.g. "koala.jpg" */
@@ -32,6 +36,7 @@ export interface PostMeta {
     /* Unsplash requires the photographer be credited wherever the photo runs */
     coverCredit: string | null;
     coverCreditUrl: string | null;
+    readingMinutes: number;
 }
 
 export interface Post extends PostMeta {
@@ -53,25 +58,34 @@ export function coverFilePath(cover: string): string {
 /* Frontmatter is hand-written, so every field beyond the original four is
    optional and defaults to the pre-syndication behaviour: a tech post that
    only ever appeared on the site. */
-function parseMeta(slug: string, data: Record<string, any>): PostMeta {
+function parseMeta(
+    slug: string,
+    data: Record<string, any>,
+    markdown: string,
+): PostMeta {
     return {
         slug,
         title: data.title,
         date: data.date,
         description: data.description,
         section: data.section ?? "tech",
+        publication: data.publication ?? null,
         channels: data.channels ?? ["site"],
         cover: data.cover ?? null,
         coverAlt: data.coverAlt ?? null,
         coverCredit: data.coverCredit ?? null,
         coverCreditUrl: data.coverCreditUrl ?? null,
+        readingMinutes: Math.max(
+            1,
+            Math.round(markdown.split(/\s+/).length / 220),
+        ),
     };
 }
 
-export function formatDate(date: string): string {
+export function formatDate(date: string, short = false): string {
     return new Date(date).toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
+        month: short ? "short" : "long",
         day: "numeric",
         timeZone: "UTC",
     });
@@ -112,15 +126,19 @@ export function getAllPosts(channel: Channel = "site"): PostMeta[] {
             const slug = filename.replace(/\.md$/, "");
             const filePath = path.join(postsDirectory, filename);
             const fileContents = fs.readFileSync(filePath, "utf8");
-            const { data } = matter(fileContents);
+            const { data, content } = matter(fileContents);
 
-            return parseMeta(slug, data);
+            return parseMeta(slug, data, content);
         })
         .filter((post) => post.channels.includes(channel));
 
     return posts.sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
     );
+}
+
+export function getPublicationPosts(publication: Publication = "bitrot"): PostMeta[] {
+    return getAllPosts().filter((post) => post.publication === publication);
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
@@ -141,7 +159,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
         .process(markdownContent);
 
     return {
-        ...parseMeta(slug, data),
+        ...parseMeta(slug, data, markdownContent),
         content: result.toString(),
         toc: data.toc ? extractToc(markdownContent) : null,
     };

@@ -43,6 +43,9 @@ export default function Privacy() {
                     </p>
                 </li>
             </ol>
+            <p className="text-sm">
+                Alexander Klos / Suite 59, 30 Durham Road, London, SW20 0TW
+            </p>
         </div>
     );
 }

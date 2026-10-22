@@ -20,6 +20,7 @@ cover: how-do-we-stop-vibe-coding.jpg
 coverAlt: Digital art with text "claude code" and "vibe coding"
 coverCredit: Bernd 📷 Dittrich
 coverCreditUrl: https://unsplash.com/@hdbernd?utm_source=alexklos&utm_medium=referral
+publication: "bitrot"
 ---
 
 When Claude Code blew up in popularity near the end of December 2025, a large portion of software developers quickly shifted to using coding agents as part of their main development workflows.

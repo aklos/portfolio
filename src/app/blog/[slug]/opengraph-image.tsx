@@ -11,16 +11,14 @@ export function generateStaticParams() {
     return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
-/* light theme colors from globals.css — cards render the same for everyone */
-const paper = "#f6f6f4";
-const ink = "#16181c";
-const emulsion = "#a8551f";
-const signal = "#1568b8";
-const muted = "#666b72";
-
-/* the decay bit-stream from the site header: blocks thinning out into
-   dropouts (0 = a gap in the stream) */
-const decayBits = [1, 1, 0.85, 0, 0.7, 0.55, 0, 0.4, 0.25, 0, 0.12];
+/* dark theme colors from globals.css; cards render the same for everyone */
+const paper = "#0f1112";
+const ink = "#f2e6d3";
+const muted = "#8f918f";
+/* and the site's own, for posts outside the publication */
+const sitePaper = "#141414";
+const siteInk = "#f4f4f4";
+const siteMuted = "#8c8c8c";
 
 export default async function Image({
     params,
@@ -56,20 +54,86 @@ export default async function Image({
         }
     }
 
-    const bricolage = fs.readFileSync(
-        path.join(process.cwd(), "src/assets/bricolage-grotesque-bold.ttf"),
-    );
-    const plexMono = fs.readFileSync(
-        path.join(process.cwd(), "src/assets/ibm-plex-mono-regular.ttf"),
-    );
-    const plexSans = fs.readFileSync(
-        path.join(process.cwd(), "src/assets/ibm-plex-sans-regular.ttf"),
+    const schibsted = fs.readFileSync(
+        path.join(process.cwd(), "src/assets/schibsted-grotesk.ttf"),
     );
 
-    const title = post?.title ?? "Alex Klos";
+    /* a plain post gets the site's card: title in the site's type on the
+       dark ground, like the site card itself */
+    if (post && post.publication !== "bitrot") {
+        const semibold = fs.readFileSync(
+            path.join(process.cwd(), "src/assets/schibsted-grotesk-semibold.ttf"),
+        );
+        return new ImageResponse(
+            (
+                <div
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                        padding: 72,
+                        background: sitePaper,
+                        color: siteInk,
+                        fontFamily: "Schibsted Grotesk",
+                    }}
+                >
+                    <div style={{ fontSize: 30, fontWeight: 600 }}>Alex Klos</div>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div
+                            style={{
+                                fontSize: post.title.length > 40 ? 64 : 80,
+                                fontWeight: 600,
+                                letterSpacing: -3,
+                                lineHeight: 1.05,
+                            }}
+                        >
+                            {post.title}
+                        </div>
+                        {post.description && (
+                            <div
+                                style={{
+                                    fontSize: 28,
+                                    color: siteMuted,
+                                    lineHeight: 1.4,
+                                    marginTop: 20,
+                                }}
+                            >
+                                {post.description}
+                            </div>
+                        )}
+                    </div>
+                    <div style={{ fontSize: 26, color: siteMuted }}>
+                        {formatDate(post.date)}
+                    </div>
+                </div>
+            ),
+            {
+                ...size,
+                fonts: [
+                    { name: "Schibsted Grotesk", data: schibsted, weight: 400 },
+                    { name: "Schibsted Grotesk", data: semibold, weight: 600 },
+                ],
+            },
+        );
+    }
+
+    const bebas = fs.readFileSync(
+        path.join(process.cwd(), "src/assets/bebas-neue.ttf"),
+    );
+    const art = fs
+        .readFileSync(path.join(process.cwd(), "src/assets/bitrot-art.jpg"))
+        .toString("base64");
+
+    const title = post?.title ?? "Bit Rot";
     const description = post?.description ?? "";
-    const date = post ? formatDate(post.date) : "";
+    const date = post
+        ? `${post.section[0].toUpperCase()}${post.section.slice(1)}, ${formatDate(post.date)}`
+        : "";
 
+    /* text on the left, the 630px-square cover art (which carries the
+       wordmark) on the right */
     return new ImageResponse(
         (
             <div
@@ -77,112 +141,80 @@ export default async function Image({
                     width: "100%",
                     height: "100%",
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
                     backgroundColor: paper,
-                    padding: "72px 80px",
                 }}
             >
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div
-                        style={{
-                            fontFamily: "Bricolage Grotesque",
-                            fontSize: 38,
-                            color: ink,
-                        }}
-                    >
-                        Alex Klos
-                    </div>
-                    <div style={{ display: "flex", gap: 4, marginTop: 6 }}>
-                        {decayBits.map((bit, i) => (
-                            <div
-                                key={i}
-                                style={{
-                                    width: 8,
-                                    height: 8,
-                                    backgroundColor: emulsion,
-                                    opacity: bit,
-                                }}
-                            />
-                        ))}
-                    </div>
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div
-                        style={{
-                            fontFamily: "Bricolage Grotesque",
-                            fontSize: title.length > 45 ? 60 : 76,
-                            color: ink,
-                            lineHeight: 1.05,
-                            letterSpacing: "-0.02em",
-                            maxWidth: 1000,
-                        }}
-                    >
-                        {title}
-                    </div>
-                    {description && (
-                        <div
-                            style={{
-                                fontFamily: "IBM Plex Sans",
-                                fontSize: 32,
-                                color: muted,
-                                lineHeight: 1.4,
-                                maxWidth: 960,
-                                marginTop: 24,
-                            }}
-                        >
-                            {description}
-                        </div>
-                    )}
-                </div>
-
                 <div
                     style={{
+                        width: 570,
+                        height: "100%",
                         display: "flex",
+                        flexDirection: "column",
                         justifyContent: "space-between",
-                        alignItems: "center",
+                        padding: "64px 56px 52px",
                     }}
                 >
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div
+                            style={{
+                                fontFamily: "Bebas Neue",
+                                fontSize: title.length > 40 ? 72 : 86,
+                                color: ink,
+                                lineHeight: 0.95,
+                                textTransform: "uppercase",
+                            }}
+                        >
+                            {title}
+                        </div>
+                        {description && (
+                            <div
+                                style={{
+                                    fontFamily: "Schibsted Grotesk",
+                                    fontWeight: 400,
+                                    fontSize: 24,
+                                    color: muted,
+                                    lineHeight: 1.4,
+                                    marginTop: 18,
+                                }}
+                            >
+                                {description}
+                            </div>
+                        )}
+                    </div>
+
                     <div
                         style={{
-                            fontFamily: "IBM Plex Mono",
-                            fontSize: 26,
+                            display: "flex",
+                            justifyContent: "space-between",
+                            fontFamily: "Schibsted Grotesk",
+                            fontWeight: 400,
+                            fontSize: 20,
                             color: muted,
                         }}
                     >
-                        {date}
-                    </div>
-                    <div
-                        style={{
-                            fontFamily: "IBM Plex Mono",
-                            fontSize: 26,
-                            color: signal,
-                        }}
-                    >
-                        Blog
+                        <span>{date}</span>
+                        <span>Alex Klos</span>
                     </div>
                 </div>
+                <img
+                    src={`data:image/jpeg;base64,${art}`}
+                    width={630}
+                    height={630}
+                />
             </div>
         ),
         {
             ...size,
             fonts: [
                 {
-                    name: "Bricolage Grotesque",
-                    data: bricolage,
-                    weight: 700,
-                    style: "normal",
-                },
-                {
-                    name: "IBM Plex Mono",
-                    data: plexMono,
+                    name: "Bebas Neue",
+                    data: bebas,
                     weight: 400,
                     style: "normal",
                 },
                 {
-                    name: "IBM Plex Sans",
-                    data: plexSans,
+                    name: "Schibsted Grotesk",
+                    data: schibsted,
                     weight: 400,
                     style: "normal",
                 },

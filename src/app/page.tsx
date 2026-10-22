@@ -1,238 +1,200 @@
-import GithubContributions from "@/components/github-calendar";
-import Pattern from "@/components/pattern";
+import Link from "next/link";
+import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import { RiTwitterXFill } from "react-icons/ri";
 import SectionHeading from "@/components/section-heading";
+import ProjectCard, { type Project } from "@/components/project-card";
+import PostList from "@/components/post-list";
+import PublicationHero from "@/components/publication-hero";
+import { getAllPosts } from "@/lib/blog";
+import { EMAIL, PUBLICATION } from "@/lib/site";
 
-const projects = [
+/* Projects are products people use; tools are things built for other
+   builders */
+const projects: Project[] = [
     {
-        name: "Scryer",
-        type: "Desktop App",
-        year: "2026",
-        link: "https://github.com/aklos/scryer",
-        desc: "Visual architecture planner for AI coding assistants",
-    },
-    {
-        name: "FLIP Water Sim",
-        type: "Godot Extension",
-        year: "2024",
-        link: "https://github.com/aklos/godot-flip-water-simulation",
-        desc: "FLIP fluid simulation for Godot 4 in C++",
+        name: "CNTRC AI",
+        kind: "Platform",
+        years: "2023",
+        desc: "Long-term visitor analytics platform.",
+        stack: "Next.js",
+        shot: "/projects/cntrc.webp",
+        accent: { pattern: "concentric", color: "#f2b631" },
+        link: { label: "cntrc.ai", href: "https://www.cntrc.ai/" },
     },
     {
         name: "Detoxer",
-        type: "Browser Extension",
-        year: "2023",
-        link: "https://addons.mozilla.org/en-US/firefox/addon/detoxer",
-        desc: "Firefox extension for social media detox",
-    },
-    {
-        name: "CNTRC AI",
-        type: "Platform",
-        year: "2023",
-        link: "https://www.cntrc.ai/",
-        desc: "Long-term visitor analytics platform",
-    },
-    {
-        name: "Next Chapter",
-        type: "Fullstack",
-        year: "2023",
-        link: "https://www.nextchapter.agency/en",
-        desc: "Agency website with modern design",
-    },
-    {
-        name: "Hoorcentrum Aerts",
-        type: "Fullstack",
-        year: "2023",
-        link: "https://hoorcentrumaerts.be/",
-        desc: "Healthcare website for audiology practice",
-    },
-    {
-        name: "Slogidex",
-        type: "Desktop App",
-        year: "2023",
-        link: "https://github.com/aklos/slogidex",
-        desc: "Process management tool",
-    },
-    {
-        name: "This Machine Greens",
-        type: "Fullstack",
-        year: "2021",
-        link: "https://thismachinegreens.com/",
-        desc: "Interactive website with VFX",
+        kind: "Browser extension",
+        years: "2023",
+        desc: "Firefox extension for social media detox.",
+        stack: "Firefox WebExtension",
+        shot: "/projects/detoxer.webp",
+        accent: { pattern: "halftone", color: "#3ecf6e" },
+        link: {
+            label: "addons.mozilla.org",
+            href: "https://addons.mozilla.org/en-US/firefox/addon/detoxer",
+        },
     },
 ];
 
-const experience = [
+const tools: Project[] = [
     {
-        company: "Kupigo",
-        role: "Tech Partner",
-        period: "2026-Present",
+        name: "Scryer",
+        kind: "Desktop app",
+        years: "2026–",
+        desc: "Model-driven development for coding agents. Plan changes in a shared responsibility model mapped to your code; your agent implements it through a built-in MCP server.",
+        stack: "Rust, Tauri, React",
+        shot: "/projects/scryer.webp",
+        accent: { pattern: "lattice", color: "#0293a7" },
+        link: {
+            label: "github.com/aklos/scryer",
+            href: "https://github.com/aklos/scryer",
+        },
     },
     {
-        company: "Freelancing",
-        role: "Software Engineer",
-        period: "2020-Present",
+        name: "FLIP Water Sim",
+        kind: "Godot extension",
+        years: "2024",
+        desc: "FLIP fluid simulation for Godot 4 in C++.",
+        stack: "C++, Godot 4",
+        accent: { pattern: "waves", color: "#8b6cf0" },
+        link: {
+            label: "github.com/aklos/godot-flip-water-simulation",
+            href: "https://github.com/aklos/godot-flip-water-simulation",
+        },
     },
+];
+
+const socials = [
+    { label: "GitHub", href: "https://github.com/aklos", Icon: AiFillGithub },
     {
-        company: "Bulb Energy",
-        type: "London, UK",
-        role: "Software Engineer",
-        period: "2019-2020",
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/in/alexander-klos-460787120",
+        Icon: AiFillLinkedin,
     },
-    {
-        company: "Motorway",
-        type: "London, UK",
-        role: "Software Engineer",
-        period: "2017-2019",
-    },
-    {
-        company: "SSK",
-        type: "Wroclaw, Poland",
-        role: "Junior Software Engineer",
-        period: "2013-2017",
-    },
+    { label: "X", href: "https://x.com/alexmklos", Icon: RiTwitterXFill },
 ];
 
 export default function Home() {
+    const latest = getAllPosts().slice(0, 3);
+
     return (
-        <div className="min-h-screen">
-            {/* Hero */}
-            <section className="relative overflow-clip">
-                <div className="relative max-w-4xl mx-auto px-6 pt-10 md:pt-16 pb-16 md:pb-24">
-                <div className="peer/hero relative flex flex-col-reverse md:flex-row md:items-center gap-8 md:gap-12">
-                    <div className="flex-1">
-                        <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-5 text-balance">
-                            I build AI systems, developer tools, and the
-                            occasional game.
-                        </h1>
-                        <p className="text-muted text-lg leading-relaxed max-w-xl">
-                            AI engineering is the day job; the web, desktop,
-                            and games fill the rest. Currently building{" "}
-                            <a
-                                href="https://github.com/aklos/scryer"
-                                className="text-signal hover:underline underline-offset-4"
-                            >
-                                Scryer
-                            </a>
-                            , a visual architecture planner for AI coding
-                            assistants.
-                        </p>
-                    </div>
-                    <div className="relative shrink-0 self-start md:self-auto group">
-                        <Pattern
-                            variant="dither"
-                            className="absolute -inset-1 translate-x-4 translate-y-4 rounded-full text-signal/80 motion-safe:transition-transform duration-300 group-hover:translate-x-5 group-hover:translate-y-5"
-                        />
-                        <img
-                            src="/face.png"
-                            alt="Alex Klos"
-                            className="relative w-32 h-32 md:w-48 md:h-48 rounded-full object-cover"
-                        />
+        <main className="relative max-w-4xl mx-auto px-6 pt-20 md:pt-28 pb-24">
+            {/* the dot grid sits behind the intro only; it runs out of the
+                content column on the right and is gone before the projects */}
+            <div
+                aria-hidden="true"
+                className="dot-grid absolute -top-14 -right-24 md:-right-48 left-1/3 h-[34rem] -z-10 pointer-events-none"
+            />
+            {/* Intro */}
+            <section className="mb-24">
+                <h1 className="text-5xl md:text-7xl font-semibold tracking-[-0.04em] leading-[1.02] text-balance mb-12">
+                    Hi, I haven't written code
+                    <br />
+                    since December 2025.
+                </h1>
+
+                <div className="flex items-center gap-4 mb-6">
+                    <img
+                        src="/face.png"
+                        alt="Alex Klos"
+                        className="size-12 rounded-md object-cover"
+                    />
+                    <div>
+                        <p className="font-semibold leading-tight">Alex Klos</p>
+                        <div className="flex items-center gap-3 mt-1.5">
+                            {socials.map(({ label, href, Icon }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    aria-label={label}
+                                    className="text-muted hover:text-ink transition-colors"
+                                >
+                                    <Icon className="text-base" />
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                {/* Halftone diamond in the gap between text and photo;
-                    rotates when the intro block above is hovered */}
-                <Pattern
-                    variant="dither"
-                    className="pointer-events-none absolute -z-10 top-4 right-16 md:right-32 rotate-45 w-72 h-72 md:w-96 md:h-96 text-emulsion/10 motion-safe:transition-transform duration-1000 ease-out peer-hover/hero:rotate-[57deg]"
+                <div className="text-muted text-lg leading-relaxed max-w-2xl mb-10 space-y-4">
+                    <p>
+                        The agents write most code now. I decide what to build.
+                        Right now that&apos;s{" "}
+                        <a
+                            href="https://github.com/aklos/scryer"
+                            className="text-ink font-medium hover:text-teal transition-colors"
+                        >
+                            Scryer
+                        </a>
+                        , which helps humans and agents understand what&apos;s
+                        true about a codebase after blasting it with tokens, and
+                        consultancy work. Before that, I was a software engineer
+                        at Bulb and Motorway.
+                    </p>
+                    <p>
+                        Software is the easy part. What AI does to everything
+                        else in an already troubled society is what I write
+                        about in{" "}
+                        <Link
+                            href={PUBLICATION.path}
+                            className="text-ink font-medium hover:text-teal transition-colors"
+                        >
+                            {PUBLICATION.name}
+                        </Link>
+                        .
+                    </p>
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                    <a
+                        href={`mailto:${EMAIL}`}
+                        className="btn btn-primary group/btn"
+                    >
+                        Contact
+                        <span
+                            aria-hidden="true"
+                            className="motion-safe:transition-transform group-hover/btn:translate-x-0.5"
+                        >
+                            &rarr;
+                        </span>
+                    </a>
+                    <Link href={PUBLICATION.path} className="btn btn-secondary">
+                        Read {PUBLICATION.name}
+                    </Link>
+                </div>
+            </section>
+
+            <section id="projects" className="mb-24 scroll-mt-20">
+                <SectionHeading title="Projects" />
+                <div className="flex flex-col gap-4">
+                    {projects.map((project) => (
+                        <ProjectCard key={project.name} project={project} />
+                    ))}
+                </div>
+            </section>
+
+            <section id="tools" className="mb-24 scroll-mt-20">
+                <SectionHeading title="Tools" />
+                <div className="flex flex-col gap-4">
+                    {tools.map((tool) => (
+                        <ProjectCard key={tool.name} project={tool} />
+                    ))}
+                </div>
+            </section>
+
+            {/* the publication as the feature, then the latest posts from the
+                whole blog */}
+            <section id="blog" className="scroll-mt-20">
+                <div className="mb-10">
+                    <PublicationHero aspect="sm:aspect-[2/1]" heading="h2" />
+                </div>
+                <SectionHeading
+                    title="Latest posts"
+                    href="/blog"
+                    linkLabel="All posts"
                 />
-
-                {/* GitHub activity, layered into the hero */}
-                <div className="relative mt-14 group">
-                    <Pattern
-                        variant="scanlines"
-                        className="absolute inset-0 translate-x-2 translate-y-2 rounded-xs text-emulsion/25 motion-safe:transition-transform duration-300 group-hover:translate-x-3.5 group-hover:translate-y-3.5"
-                    />
-                    <Pattern
-                        variant="dither"
-                        className="absolute -top-3 -right-3 w-28 h-16 text-signal/70 motion-safe:transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-                    />
-                    <div className="relative bg-paper border border-line rounded-xs p-5 md:p-6 min-h-28">
-                        <GithubContributions />
-                    </div>
-                </div>
-                </div>
+                <PostList posts={latest} />
             </section>
-
-            {/* Content */}
-            <section className="max-w-4xl mx-auto px-6 pb-24">
-                {/* Projects */}
-                <div className="mb-24">
-                    <SectionHeading title="Projects" sub="Selected work" />
-
-                    <div className="grid sm:grid-cols-2 gap-5">
-                        {projects.map((project, i) => (
-                            <a
-                                key={project.name}
-                                href={project.link}
-                                className="relative group"
-                            >
-                                <Pattern
-                                    variant="scanlines"
-                                    className={`absolute inset-0 rounded-xs opacity-0 motion-safe:transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-1.5 group-hover:translate-y-1.5 ${
-                                        i % 2 ? "text-emulsion/40" : "text-signal/50"
-                                    }`}
-                                />
-                                <div className="relative h-full bg-paper border border-line rounded-xs p-5 motion-safe:transition-transform duration-200 group-hover:-translate-y-0.5">
-                                    <div className="flex items-baseline justify-between gap-3 mb-2 font-mono text-xs text-muted">
-                                        <span className="uppercase tracking-wider">
-                                            {project.type}
-                                        </span>
-                                        <span className="tabular-nums">
-                                            {project.year}
-                                        </span>
-                                    </div>
-                                    <h3 className="font-display text-lg font-bold mb-1 group-hover:text-signal transition-colors">
-                                        {project.name}
-                                    </h3>
-                                    <p className="text-sm text-muted leading-relaxed">
-                                        {project.desc}
-                                    </p>
-                                </div>
-                            </a>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Experience */}
-                <div className="mb-24">
-                    <SectionHeading title="Experience" sub="Where I've worked" />
-
-                    <div className="border-t border-line">
-                        {experience.map((job) => (
-                            <div
-                                key={job.company}
-                                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-5 py-5 border-b border-line"
-                            >
-                                <div className="flex items-baseline gap-3">
-                                    <span className="font-display font-semibold">
-                                        {job.company}
-                                    </span>
-                                    {job.type && (
-                                        <span className="text-xs text-muted">
-                                            {job.type}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className="flex items-baseline gap-4">
-                                    <span className="text-sm text-muted">
-                                        {job.role}
-                                    </span>
-                                    <span
-                                        className={`font-mono text-xs tabular-nums ${
-                                            job.period.endsWith("Present")
-                                                ? "text-emulsion"
-                                                : "text-muted"
-                                        }`}
-                                    >
-                                        {job.period}
-                                    </span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        </div>
+        </main>
     );
 }
