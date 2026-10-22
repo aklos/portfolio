@@ -8,16 +8,16 @@
        grey) with white cards; colour comes only from each project's accent.
        Bit Rot (.theme-bitrot, below) is the cover's world: teal-black,
        cream type, teal actions with dust specks. Teal is shared by both. */
+    /* light mirrors dark: cards are the page, one step darker, no edge */
     --theme-paper: #f3f3f2;
     --theme-ink: #111111;
     --theme-teal: #0293a7;
     --theme-muted: #6b6b6b;
-    --theme-line: #e3e3e1;
-    --theme-mist: #ffffff;
-    --theme-mist-strong: #fafafa;
-    /* shadows: soft and short on the light ground */
-    --shadow-card: 0 0 0 1px rgb(20 20 20 / 0.06), 0 1px 2px rgb(20 20 20 / 0.05),
-        0 10px 28px -12px rgb(20 20 20 / 0.16);
+    --theme-line: #e0e0de;
+    --theme-mist: #e9e9e7;
+    --theme-mist-strong: #e2e2e0;
+    /* no card edge; floating things (screenshots, buttons) still cast one */
+    --shadow-card: none;
     --shadow-float: 0 12px 32px -8px rgb(20 20 20 / 0.28);
     --shadow-button: 0 1px 2px rgb(20 20 20 / 0.12);
     /* the cover's dust, used by the specks utility and the primary button */
