@@ -91,7 +91,7 @@ export default function Home() {
 
                 <div className="flex items-center gap-4 mb-6">
                     <img
-                        src="/face.png"
+                        src="/face.jpg"
                         alt="Alex Klos"
                         className="size-12 rounded-md object-cover"
                     />
